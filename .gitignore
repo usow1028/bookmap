@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+dist
+.DS_Store
+npm-debug.log*
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+data4libraryapi.md
+도서관정보나루_API_Manual.pdf
+bookmap-*.png
