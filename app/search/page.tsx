@@ -16,12 +16,17 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
   const nextParams = new URLSearchParams();
   const query = readString(params.q);
+  const isbn = readString(params.isbn);
   const location = readString(params.location);
   const lat = readString(params.lat);
   const lng = readString(params.lng);
 
   if (query) {
     nextParams.set("q", query);
+  }
+
+  if (isbn) {
+    nextParams.set("isbn", isbn);
   }
 
   if (location) {

@@ -1,12 +1,21 @@
 "use client";
 
-import { FormEvent, KeyboardEvent, useEffect, useId, useMemo, useState } from "react";
+import { KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from "react";
 import { defaultLocation } from "@/lib/mock-data";
-import { formatDistance, formatEta } from "@/lib/format";
-import { LocationSuggestion, SearchResponse } from "@/lib/types";
+import { BookCandidate, LocationSuggestion, SearchResponse } from "@/lib/types";
+import { BookCoverImage } from "@/components/BookCoverImage";
+import { LibraryCandidateCard } from "@/components/LibraryCandidateCard";
 import { LibraryMap } from "@/components/LibraryMap";
 
 const SAVED_LOCATION_KEY = "bookmap.savedLocation";
+
+type SearchRequestState = {
+  query: string;
+  locationLabel: string;
+  coordinateLat: number | null;
+  coordinateLng: number | null;
+  selectedIsbn?: string;
+};
 
 type BookmapWorkspaceProps = {
   initialQuery?: string;
@@ -15,6 +24,88 @@ type BookmapWorkspaceProps = {
   initialLng?: number;
   initialResponse?: SearchResponse | null;
 };
+
+function getSourceLabel(source: SearchResponse["source"] | null) {
+  if (!source) {
+    return "지도";
+  }
+
+  return source === "live" ? "실데이터" : "샘플";
+}
+
+function getLocationSuggestionBadge(suggestion: LocationSuggestion) {
+  if (suggestion.kind === "place") {
+    return "장소";
+  }
+
+  if (suggestion.kind === "preset") {
+    return "저장 위치";
+  }
+
+  return "주소";
+}
+
+function canSearchBooks(query: string) {
+  const trimmed = query.trim();
+
+  return trimmed.length >= 2 || /^\d{13}$/.test(trimmed);
+}
+
+function buildSearchParams({
+  query,
+  locationLabel,
+  coordinateLat,
+  coordinateLng,
+  selectedIsbn,
+}: SearchRequestState) {
+  const params = new URLSearchParams();
+
+  if (query.trim()) {
+    params.set("q", query.trim());
+  }
+
+  if (locationLabel.trim()) {
+    params.set("location", locationLabel.trim());
+  }
+
+  if (coordinateLat !== null && coordinateLng !== null) {
+    params.set("lat", String(coordinateLat));
+    params.set("lng", String(coordinateLng));
+  }
+
+  if (selectedIsbn) {
+    params.set("isbn", selectedIsbn);
+  }
+
+  return params;
+}
+
+function syncUrlWithParams(params: URLSearchParams) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.history.replaceState(null, "", params.size > 0 ? `/?${params.toString()}` : "/");
+}
+
+async function requestSearchResponse(
+  request: SearchRequestState,
+  signal?: AbortSignal,
+) {
+  const params = buildSearchParams(request);
+  const apiResponse = await fetch(`/api/search?${params.toString()}`, signal ? { signal } : undefined);
+  const payload = (await apiResponse.json().catch(() => null)) as
+    | (SearchResponse & { error?: string })
+    | null;
+
+  if (!apiResponse.ok) {
+    throw new Error(payload?.error || `search_failed_${apiResponse.status}`);
+  }
+
+  syncUrlWithParams(params);
+
+  return payload as SearchResponse;
+}
 
 export function BookmapWorkspace({
   initialQuery = "",
@@ -37,59 +128,95 @@ export function BookmapWorkspace({
             lng: initialResponse.location.lng,
           }
         : null;
+  const initialResolvedLocationLabel = initialResponse?.location.label ?? initialLocationLabel;
   const [query, setQuery] = useState(initialQuery);
-  const [locationLabel, setLocationLabel] = useState(initialLocationLabel);
-  const [coordinates, setCoordinates] = useState<{
+  const [locationLabel, setLocationLabel] = useState(initialResolvedLocationLabel);
+  const [committedLocationLabel, setCommittedLocationLabel] = useState(initialResolvedLocationLabel);
+  const [committedCoordinates, setCommittedCoordinates] = useState<{
     lat: number;
     lng: number;
   } | null>(resolvedInitialCoordinates);
-  const [locationDetail, setLocationDetail] = useState("");
-  const [locationAccuracyMeters, setLocationAccuracyMeters] = useState<number | null>(null);
-  const [isLocationConfirmed, setIsLocationConfirmed] = useState(Boolean(resolvedInitialCoordinates));
-  const [isLocationEditorOpen, setIsLocationEditorOpen] = useState(!resolvedInitialCoordinates);
+  const [committedLocationDetail, setCommittedLocationDetail] = useState("");
   const [hasLocationInputChanged, setHasLocationInputChanged] = useState(false);
   const [locationSuggestions, setLocationSuggestions] = useState<LocationSuggestion[]>([]);
-  const [isSuggestionOpen, setIsSuggestionOpen] = useState(false);
-  const [isSuggestionLoading, setIsSuggestionLoading] = useState(false);
-  const [highlightedSuggestionIndex, setHighlightedSuggestionIndex] = useState(0);
-  const [response, setResponse] = useState<SearchResponse | null>(initialResponse);
-  const [message, setMessage] = useState(() => {
-    if (!initialResponse) {
-      return "";
+  const [isLocationSuggestionOpen, setIsLocationSuggestionOpen] = useState(false);
+  const [isLocationSuggestionLoading, setIsLocationSuggestionLoading] = useState(false);
+  const [highlightedLocationIndex, setHighlightedLocationIndex] = useState(0);
+  const [bookSuggestions, setBookSuggestions] = useState<BookCandidate[]>(initialResponse?.books ?? []);
+  const [isBookSuggestionLoading, setIsBookSuggestionLoading] = useState(false);
+  const [isBookSuggestionOpen, setIsBookSuggestionOpen] = useState(false);
+  const [highlightedBookIndex, setHighlightedBookIndex] = useState(0);
+  const [selectedResponse, setSelectedResponse] = useState<SearchResponse | null>(
+    initialResponse?.resolvedBook ? initialResponse : null,
+  );
+  const [activeBookIsbn, setActiveBookIsbn] = useState<string | null>(
+    initialResponse?.resolvedBook?.isbn13 ?? null,
+  );
+  const [pendingBookIsbn, setPendingBookIsbn] = useState<string | null>(null);
+  const [selectedLibraryId, setSelectedLibraryId] = useState<string | null>(null);
+  const locationSuggestionListId = useId();
+  const bookSuggestionListId = useId();
+  const committedLocationLabelRef = useRef(initialResolvedLocationLabel);
+  const hasLocationInputChangedRef = useRef(false);
+  const coordinateLat = committedCoordinates?.lat ?? null;
+  const coordinateLng = committedCoordinates?.lng ?? null;
+  const selectedResponseMatchesCommittedLocation =
+    selectedResponse &&
+    (coordinateLat !== null && coordinateLng !== null
+      ? selectedResponse.location.lat === coordinateLat &&
+        selectedResponse.location.lng === coordinateLng
+      : selectedResponse.location.label === (committedLocationLabel.trim() || defaultLocation.label));
+  const isLocationCommitted =
+    Boolean(committedCoordinates) &&
+    !hasLocationInputChanged &&
+    locationLabel.trim() === committedLocationLabel.trim();
+
+  const visibleLocation = useMemo(
+    () => ({
+      label:
+        (selectedResponseMatchesCommittedLocation
+          ? selectedResponse?.location.label
+          : committedLocationLabel) || defaultLocation.label,
+      lat:
+        (selectedResponseMatchesCommittedLocation
+          ? selectedResponse?.location.lat
+          : coordinateLat) ?? defaultLocation.lat,
+      lng:
+        (selectedResponseMatchesCommittedLocation
+          ? selectedResponse?.location.lng
+          : coordinateLng) ?? defaultLocation.lng,
+    }),
+    [
+      committedLocationLabel,
+      coordinateLat,
+      coordinateLng,
+      selectedResponse?.location.label,
+      selectedResponse?.location.lat,
+      selectedResponse?.location.lng,
+      selectedResponseMatchesCommittedLocation,
+    ],
+  );
+  const selectedBook = selectedResponse?.resolvedBook ?? null;
+  const selectedBookKey = pendingBookIsbn ?? activeBookIsbn;
+  const libraryResults = selectedResponse?.results ?? [];
+
+  useEffect(() => {
+    committedLocationLabelRef.current = committedLocationLabel;
+  }, [committedLocationLabel]);
+
+  useEffect(() => {
+    hasLocationInputChangedRef.current = hasLocationInputChanged;
+  }, [hasLocationInputChanged]);
+
+  useEffect(() => {
+    if (!selectedResponse?.resolvedBook || selectedResponse.results.length === 0) {
+      setSelectedLibraryId(null);
+      return;
     }
 
-    if (initialResponse.warnings[0]) {
-      return initialResponse.warnings[0];
-    }
-
-    if (!initialResponse.resolvedBook) {
-      return "검색 결과가 없습니다.";
-    }
-
-    return `${initialResponse.results.length}곳을 찾았습니다.`;
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const suggestionListId = useId();
-
-  const bestResult = response?.results[0] ?? null;
-  const visibleLocation = {
-    label: response?.location.label || locationLabel || defaultLocation.label,
-    lat: response?.location.lat ?? coordinates?.lat ?? defaultLocation.lat,
-    lng: response?.location.lng ?? coordinates?.lng ?? defaultLocation.lng,
-    accuracyMeters: locationAccuracyMeters ?? undefined,
-  };
-
-  const overlayText = useMemo(() => {
-    if (!response) {
-      return "위치와 책 제목을 입력하면 도서관 위치가 지도에 표시됩니다.";
-    }
-
-    if (!bestResult) {
-      return "검색 결과가 없습니다.";
-    }
-
-    return `${bestResult.library.name} · ${formatDistance(bestResult.distanceKm)} · ${formatEta(bestResult.etaMinutes)}`;
-  }, [bestResult, response]);
+    // A new search response should always snap back to the latest recommended library.
+    setSelectedLibraryId(selectedResponse.results[0]?.library.id ?? null);
+  }, [selectedResponse]);
 
   useEffect(() => {
     if (!canHydrateSavedLocation || typeof window === "undefined") {
@@ -118,14 +245,12 @@ export function BookmapWorkspace({
         Number.isFinite(savedLocation.lng)
       ) {
         setLocationLabel(savedLocation.label);
-        setLocationDetail(typeof savedLocation.detail === "string" ? savedLocation.detail : "");
-        setCoordinates({
+        setCommittedLocationLabel(savedLocation.label);
+        setCommittedLocationDetail(typeof savedLocation.detail === "string" ? savedLocation.detail : "");
+        setCommittedCoordinates({
           lat: savedLocation.lat,
           lng: savedLocation.lng,
         });
-        setLocationAccuracyMeters(null);
-        setIsLocationConfirmed(true);
-        setIsLocationEditorOpen(false);
         setHasLocationInputChanged(false);
       }
     } catch {
@@ -136,10 +261,9 @@ export function BookmapWorkspace({
   useEffect(() => {
     if (
       typeof window === "undefined" ||
-      !coordinates ||
-      !isLocationConfirmed ||
-      !locationLabel.trim() ||
-      locationLabel.includes("확인 중")
+      !committedCoordinates ||
+      !committedLocationLabel.trim() ||
+      committedLocationLabel.includes("확인 중")
     ) {
       return;
     }
@@ -147,32 +271,57 @@ export function BookmapWorkspace({
     window.localStorage.setItem(
       SAVED_LOCATION_KEY,
       JSON.stringify({
-        label: locationLabel.trim(),
-        detail: locationDetail.trim(),
-        lat: coordinates.lat,
-        lng: coordinates.lng,
+        label: committedLocationLabel.trim(),
+        detail: committedLocationDetail.trim(),
+        lat: committedCoordinates.lat,
+        lng: committedCoordinates.lng,
       }),
     );
-  }, [coordinates, isLocationConfirmed, locationDetail, locationLabel]);
+  }, [committedCoordinates, committedLocationDetail, committedLocationLabel]);
+
+  function applyLocationSuggestion(suggestion: LocationSuggestion) {
+    setLocationLabel(suggestion.label);
+    setCommittedLocationLabel(suggestion.label);
+    setCommittedLocationDetail(suggestion.detail ?? "");
+    setCommittedCoordinates({
+      lat: suggestion.lat,
+      lng: suggestion.lng,
+    });
+    setHasLocationInputChanged(false);
+    setLocationSuggestions([]);
+    setIsLocationSuggestionOpen(false);
+    setHighlightedLocationIndex(0);
+  }
+
+  function clearSelectedBookState() {
+    setActiveBookIsbn(null);
+    setPendingBookIsbn(null);
+    setSelectedResponse(null);
+    setSelectedLibraryId(null);
+  }
 
   useEffect(() => {
     const trimmed = locationLabel.trim();
 
-    if (isLocationConfirmed || !isLocationEditorOpen || !hasLocationInputChanged || trimmed.length < 2) {
+    if (!hasLocationInputChanged || trimmed.length < 2) {
       setLocationSuggestions([]);
-      setIsSuggestionOpen(false);
-      setIsSuggestionLoading(false);
-      setHighlightedSuggestionIndex(0);
+      setIsLocationSuggestionOpen(false);
+      setIsLocationSuggestionLoading(false);
+      setHighlightedLocationIndex(0);
       return;
     }
 
     const controller = new AbortController();
     const timeoutId = window.setTimeout(async () => {
-      setIsSuggestionLoading(true);
+      setIsLocationSuggestionLoading(true);
 
       try {
         const apiResponse = await fetch(
-          `/api/location-suggestions?query=${encodeURIComponent(trimmed)}`,
+          `/api/location-suggestions?query=${encodeURIComponent(trimmed)}${
+            Number.isFinite(visibleLocation.lat) && Number.isFinite(visibleLocation.lng)
+              ? `&lat=${visibleLocation.lat}&lng=${visibleLocation.lng}`
+              : ""
+          }`,
           {
             signal: controller.signal,
           },
@@ -188,8 +337,8 @@ export function BookmapWorkspace({
         const nextSuggestions = payload.suggestions ?? [];
 
         setLocationSuggestions(nextSuggestions);
-        setIsSuggestionOpen(nextSuggestions.length > 0);
-        setHighlightedSuggestionIndex(0);
+        setIsLocationSuggestionOpen(nextSuggestions.length > 0);
+        setHighlightedLocationIndex(0);
       } catch (error) {
         if (controller.signal.aborted) {
           return;
@@ -197,10 +346,10 @@ export function BookmapWorkspace({
 
         console.error(error);
         setLocationSuggestions([]);
-        setIsSuggestionOpen(false);
+        setIsLocationSuggestionOpen(false);
       } finally {
         if (!controller.signal.aborted) {
-          setIsSuggestionLoading(false);
+          setIsLocationSuggestionLoading(false);
         }
       }
     }, 220);
@@ -209,28 +358,157 @@ export function BookmapWorkspace({
       controller.abort();
       window.clearTimeout(timeoutId);
     };
-  }, [hasLocationInputChanged, isLocationConfirmed, isLocationEditorOpen, locationLabel]);
+  }, [hasLocationInputChanged, locationLabel, visibleLocation.lat, visibleLocation.lng]);
 
-  function applyLocationSuggestion(suggestion: LocationSuggestion) {
-    setLocationLabel(suggestion.label);
-    setLocationDetail(suggestion.detail ?? "");
-    setCoordinates({
-      lat: suggestion.lat,
-      lng: suggestion.lng,
-    });
-    setLocationAccuracyMeters(null);
-    setIsLocationConfirmed(true);
-    setLocationSuggestions([]);
-    setIsSuggestionOpen(false);
-    setHighlightedSuggestionIndex(0);
-    setIsLocationEditorOpen(false);
-    setHasLocationInputChanged(false);
-    setMessage("주소가 적용되었습니다.");
-  }
+  useEffect(() => {
+    if (!isLocationCommitted) {
+      setIsBookSuggestionLoading(false);
+      setIsBookSuggestionOpen(false);
+      setHighlightedBookIndex(0);
+      return;
+    }
 
-  function startLocationEdit() {
-    setIsLocationEditorOpen(true);
-    setMessage("위치를 바꾸려면 주소를 다시 입력하거나 현재 위치를 사용하세요.");
+    if (!canSearchBooks(query)) {
+      setBookSuggestions([]);
+      setIsBookSuggestionOpen(false);
+      setHighlightedBookIndex(0);
+      syncUrlWithParams(
+        buildSearchParams({
+          query: "",
+          locationLabel: committedLocationLabel,
+          coordinateLat,
+          coordinateLng,
+        }),
+      );
+      return;
+    }
+
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(async () => {
+      setIsBookSuggestionLoading(true);
+
+      try {
+        const payload = await requestSearchResponse(
+          {
+            query,
+            locationLabel: committedLocationLabel,
+            coordinateLat,
+            coordinateLng,
+          },
+          controller.signal,
+        );
+
+        if (controller.signal.aborted) {
+          return;
+        }
+
+        setBookSuggestions(payload.books);
+        setIsBookSuggestionOpen(payload.books.length > 0);
+        setHighlightedBookIndex(0);
+      } catch (error) {
+        if (controller.signal.aborted) {
+          return;
+        }
+
+        console.error(error);
+        setBookSuggestions([]);
+        setIsBookSuggestionOpen(false);
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsBookSuggestionLoading(false);
+        }
+      }
+    }, 220);
+
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeoutId);
+    };
+  }, [committedLocationLabel, coordinateLat, coordinateLng, isLocationCommitted, query]);
+
+  useEffect(() => {
+    if (!isLocationCommitted) {
+      return;
+    }
+
+    if (!activeBookIsbn) {
+      return;
+    }
+
+    const responseMatchesLocation =
+      selectedResponse?.resolvedBook?.isbn13 === activeBookIsbn &&
+      (coordinateLat !== null && coordinateLng !== null
+        ? selectedResponse.location.lat === coordinateLat &&
+          selectedResponse.location.lng === coordinateLng
+        : selectedResponse.location.label === (committedLocationLabel.trim() || defaultLocation.label));
+
+    if (responseMatchesLocation) {
+      return;
+    }
+
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const payload = await requestSearchResponse({
+          query,
+          locationLabel: committedLocationLabel,
+          coordinateLat,
+          coordinateLng,
+          selectedIsbn: activeBookIsbn,
+        });
+
+        if (!cancelled) {
+          setSelectedResponse(payload);
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.error(error);
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    activeBookIsbn,
+    committedLocationLabel,
+    coordinateLat,
+    coordinateLng,
+    isLocationCommitted,
+    query,
+    selectedResponse,
+  ]);
+
+  async function selectBook(book: BookCandidate) {
+    if (!isLocationCommitted) {
+      return;
+    }
+
+    setPendingBookIsbn(book.isbn13);
+    setIsBookSuggestionLoading(true);
+    setIsBookSuggestionOpen(false);
+
+    try {
+      const payload = await requestSearchResponse({
+        query,
+        locationLabel: committedLocationLabel,
+        coordinateLat,
+        coordinateLng,
+        selectedIsbn: book.isbn13,
+      });
+      setSelectedResponse(payload);
+      setBookSuggestions(payload.books);
+      setActiveBookIsbn(payload.resolvedBook?.isbn13 ?? book.isbn13);
+    } catch (error) {
+      console.error(error);
+      setActiveBookIsbn(null);
+      setSelectedResponse(null);
+    } finally {
+      setPendingBookIsbn(null);
+      setIsBookSuggestionLoading(false);
+    }
   }
 
   function handleLocationInputKeyDown(event: KeyboardEvent<HTMLInputElement>) {
@@ -240,287 +518,271 @@ export function BookmapWorkspace({
 
     if (event.key === "ArrowDown") {
       event.preventDefault();
-      setIsSuggestionOpen(true);
-      setHighlightedSuggestionIndex((current) => (current + 1) % locationSuggestions.length);
+      setIsLocationSuggestionOpen(true);
+      setHighlightedLocationIndex((current) => (current + 1) % locationSuggestions.length);
       return;
     }
 
     if (event.key === "ArrowUp") {
       event.preventDefault();
-      setIsSuggestionOpen(true);
-      setHighlightedSuggestionIndex((current) =>
+      setIsLocationSuggestionOpen(true);
+      setHighlightedLocationIndex((current) =>
         current === 0 ? locationSuggestions.length - 1 : current - 1,
       );
       return;
     }
 
-    if (event.key === "Enter" && isSuggestionOpen) {
+    if (event.key === "Enter" && isLocationSuggestionOpen) {
       event.preventDefault();
       applyLocationSuggestion(
-        locationSuggestions[highlightedSuggestionIndex] ?? locationSuggestions[0],
+        locationSuggestions[highlightedLocationIndex] ?? locationSuggestions[0],
       );
       return;
     }
 
     if (event.key === "Escape") {
-      setIsSuggestionOpen(false);
+      setIsLocationSuggestionOpen(false);
+      setLocationLabel(committedLocationLabel);
+      setHasLocationInputChanged(false);
     }
   }
 
-  async function submitSearch(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!query.trim()) {
-      setMessage("찾고 싶은 책을 입력해 주세요.");
+  function handleQueryInputKeyDown(event: KeyboardEvent<HTMLInputElement>) {
+    if (!bookSuggestions.length) {
       return;
     }
 
-    setIsLoading(true);
-    setMessage("");
-
-    try {
-      const params = new URLSearchParams({
-        q: query.trim(),
-        location: locationLabel.trim() || defaultLocation.label,
-      });
-
-      if (coordinates) {
-        params.set("lat", String(coordinates.lat));
-        params.set("lng", String(coordinates.lng));
-      }
-
-      const apiResponse = await fetch(`/api/search?${params.toString()}`);
-
-      if (!apiResponse.ok) {
-        throw new Error("search_failed");
-      }
-
-      const payload = (await apiResponse.json()) as SearchResponse;
-      setResponse(payload);
-      window.history.replaceState(null, "", `/?${params.toString()}`);
-
-      if (!payload.resolvedBook) {
-        setMessage(payload.warnings[0] ?? "검색 결과가 없습니다.");
-        return;
-      }
-
-      setMessage(payload.warnings[0] ?? `${payload.results.length}곳을 찾았습니다.`);
-    } catch {
-      setMessage("검색 중 오류가 발생했습니다.");
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  function requestCurrentLocation() {
-    if (!navigator.geolocation) {
-      setMessage("현재 위치를 사용할 수 없습니다.");
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setIsBookSuggestionOpen(true);
+      setHighlightedBookIndex((current) => (current + 1) % bookSuggestions.length);
       return;
     }
 
-    setMessage("현재 위치를 확인하는 중입니다.");
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setIsBookSuggestionOpen(true);
+      setHighlightedBookIndex((current) =>
+        current === 0 ? bookSuggestions.length - 1 : current - 1,
+      );
+      return;
+    }
 
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const nextCoordinates = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
+    if (event.key === "Enter" && isBookSuggestionOpen) {
+      event.preventDefault();
+      void selectBook(bookSuggestions[highlightedBookIndex] ?? bookSuggestions[0]);
+      return;
+    }
 
-        setCoordinates(nextCoordinates);
-        setLocationAccuracyMeters(
-          typeof position.coords.accuracy === "number" && Number.isFinite(position.coords.accuracy)
-            ? Math.round(position.coords.accuracy)
-            : null,
-        );
-        setLocationLabel("현재 위치 확인 중...");
-        setIsLocationConfirmed(true);
-        setIsLocationEditorOpen(false);
-        setHasLocationInputChanged(false);
-        setLocationSuggestions([]);
-        setIsSuggestionOpen(false);
-
-        try {
-          const apiResponse = await fetch(
-            `/api/location-reverse?lat=${nextCoordinates.lat}&lng=${nextCoordinates.lng}`,
-          );
-
-          if (!apiResponse.ok) {
-            throw new Error("location_reverse_failed");
-          }
-
-          const payload = (await apiResponse.json()) as {
-            location?: LocationSuggestion | null;
-          };
-          const resolvedLocation = payload.location;
-
-          if (resolvedLocation) {
-            setLocationLabel(resolvedLocation.label);
-            setLocationDetail(resolvedLocation.detail ?? "");
-            setMessage("현재 위치의 상세 주소를 반영했습니다.");
-            return;
-          }
-        } catch (error) {
-          console.error(error);
-        }
-
-        setLocationLabel(
-          `현재 위치 (${nextCoordinates.lat.toFixed(5)}, ${nextCoordinates.lng.toFixed(5)})`,
-        );
-        setLocationDetail("");
-        setMessage("현재 위치 좌표를 반영했습니다.");
-      },
-      () => {
-        setMessage("현재 위치를 가져오지 못했습니다.");
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 8000,
-      },
-    );
+    if (event.key === "Escape") {
+      setIsBookSuggestionOpen(false);
+    }
   }
 
   return (
     <section className="workspace-grid">
-      <div className="panel-card control-panel">
-        <div className="panel-header">
-          <div>
-            <p className="panel-kicker">BOOKMAP</p>
-            <h1 className="panel-title">가까운 도서관 찾기</h1>
-          </div>
+      <div className="control-panel compact-control-panel minimal-control-panel">
+        <div className="panel-header compact-panel-header">
+          <p className="panel-kicker">BOOKMAP</p>
         </div>
 
-        <form className="minimal-form" onSubmit={submitSearch}>
-          {isLocationConfirmed && !isLocationEditorOpen ? (
-            <div className="saved-location-card">
-              <div className="saved-location-copy">
-                <p className="saved-location-label">저장된 위치</p>
-                <strong>{locationLabel}</strong>
-                {locationDetail ? <p className="saved-location-meta">{locationDetail}</p> : null}
-                <p>이 위치를 기준으로 이후 검색에서는 책 제목만 입력해도 됩니다.</p>
-              </div>
-              <button className="secondary-button slim-button" type="button" onClick={startLocationEdit}>
-                위치 변경
-              </button>
-            </div>
-          ) : (
-            <div className="field-block">
-              <label htmlFor="location-input">나의 위치</label>
-              <div className="location-row">
-                <div className="location-input-wrap">
-                  <input
-                    id="location-input"
-                    className="text-input"
-                    value={locationLabel}
-                    onChange={(event) => {
-                      setLocationLabel(event.target.value);
-                      setLocationDetail("");
-                      setCoordinates(null);
-                      setLocationAccuracyMeters(null);
-                      setIsLocationConfirmed(false);
-                      setHasLocationInputChanged(true);
-                    }}
-                    onFocus={() => {
-                      if (locationSuggestions.length > 0) {
-                        setIsSuggestionOpen(true);
-                      }
-                    }}
-                    onBlur={() => {
-                      window.setTimeout(() => {
-                        setIsSuggestionOpen(false);
-                      }, 120);
-                    }}
-                    onKeyDown={handleLocationInputKeyDown}
-                    placeholder="주소 또는 지역명"
-                    autoComplete="off"
-                    role="combobox"
-                    aria-autocomplete="list"
-                    aria-controls={suggestionListId}
-                    aria-haspopup="listbox"
-                    aria-expanded={isSuggestionOpen}
-                    aria-activedescendant={
-                      isSuggestionOpen && locationSuggestions[highlightedSuggestionIndex]
-                        ? `${suggestionListId}-${highlightedSuggestionIndex}`
-                        : undefined
-                    }
-                  />
-                  {isSuggestionOpen && locationSuggestions.length > 0 ? (
-                    <div className="location-suggestion-panel" id={suggestionListId} role="listbox">
-                      {locationSuggestions.map((suggestion, index) => (
-                        <button
-                          key={`${suggestion.label}-${suggestion.lat}-${suggestion.lng}`}
-                          id={`${suggestionListId}-${index}`}
-                          className={`location-suggestion-button ${
-                            index === highlightedSuggestionIndex ? "is-active" : ""
-                          }`}
-                          type="button"
-                          role="option"
-                          aria-selected={index === highlightedSuggestionIndex}
-                          onMouseDown={(event) => event.preventDefault()}
-                          onMouseEnter={() => setHighlightedSuggestionIndex(index)}
-                          onClick={() => applyLocationSuggestion(suggestion)}
-                        >
-                          <strong>{suggestion.label}</strong>
-                          {suggestion.detail ? <span>{suggestion.detail}</span> : null}
-                        </button>
-                      ))}
+        <div className="field-block">
+          <label htmlFor="location-input">나의 위치</label>
+          <div className="location-input-wrap">
+            <input
+              id="location-input"
+              className="text-input"
+              value={locationLabel}
+              onChange={(event) => {
+                setLocationLabel(event.target.value);
+                setHasLocationInputChanged(true);
+                setIsLocationSuggestionOpen(true);
+              }}
+              onFocus={() => {
+                if (locationSuggestions.length > 0) {
+                  setIsLocationSuggestionOpen(true);
+                }
+              }}
+              onBlur={() => {
+                window.setTimeout(() => {
+                  setIsLocationSuggestionOpen(false);
+                  if (hasLocationInputChangedRef.current) {
+                    setLocationLabel(committedLocationLabelRef.current);
+                    setHasLocationInputChanged(false);
+                  }
+                }, 120);
+              }}
+              onKeyDown={handleLocationInputKeyDown}
+              placeholder="주소, 건물명, 상호명"
+              autoComplete="off"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-controls={locationSuggestionListId}
+              aria-haspopup="listbox"
+              aria-expanded={isLocationSuggestionOpen}
+              aria-activedescendant={
+                isLocationSuggestionOpen && locationSuggestions[highlightedLocationIndex]
+                  ? `${locationSuggestionListId}-${highlightedLocationIndex}`
+                  : undefined
+              }
+            />
+            {isLocationSuggestionOpen && locationSuggestions.length > 0 ? (
+              <div className="location-suggestion-panel" id={locationSuggestionListId} role="listbox">
+                {locationSuggestions.map((suggestion, index) => (
+                  <button
+                    key={`${suggestion.label}-${suggestion.lat}-${suggestion.lng}`}
+                    id={`${locationSuggestionListId}-${index}`}
+                    className={`location-suggestion-button ${
+                      index === highlightedLocationIndex ? "is-active" : ""
+                    }`}
+                    type="button"
+                    role="option"
+                    aria-selected={index === highlightedLocationIndex}
+                    onMouseDown={(event) => event.preventDefault()}
+                    onMouseEnter={() => setHighlightedLocationIndex(index)}
+                    onClick={() => applyLocationSuggestion(suggestion)}
+                  >
+                    <div className="location-suggestion-top">
+                      <strong>{suggestion.label}</strong>
+                      <span className={`location-suggestion-kind is-${suggestion.kind ?? "address"}`}>
+                        {getLocationSuggestionBadge(suggestion)}
+                      </span>
                     </div>
-                  ) : null}
-                </div>
-                <button className="secondary-button" type="button" onClick={requestCurrentLocation}>
-                  현재 위치
-                </button>
+                    {suggestion.detail ? <span>{suggestion.detail}</span> : null}
+                  </button>
+                ))}
               </div>
-              {isSuggestionLoading ? (
-                <p className="field-helper-text">입력한 주소를 바탕으로 추천 위치를 찾는 중입니다.</p>
-              ) : (
-                <p className="field-helper-text">
-                  위치는 한 번만 정하면 저장되며, 이후에는 책 제목만 입력해도 됩니다.
-                </p>
-              )}
-            </div>
-          )}
+            ) : null}
+          </div>
+          {isLocationSuggestionLoading ? <div className="inline-loading">위치 찾는 중...</div> : null}
+        </div>
 
-          <div className="field-block">
-            <label htmlFor="query-input">찾고 싶은 책</label>
+        <div className="field-block">
+          <label htmlFor="query-input">찾고 싶은 책</label>
+          <div className="book-input-wrap">
             <input
               id="query-input"
               className="text-input"
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setIsBookSuggestionOpen(true);
+                clearSelectedBookState();
+              }}
+              onFocus={() => {
+                if (bookSuggestions.length > 0) {
+                  setIsBookSuggestionOpen(true);
+                }
+              }}
+              onBlur={() => {
+                window.setTimeout(() => {
+                  setIsBookSuggestionOpen(false);
+                }, 120);
+              }}
+              onKeyDown={handleQueryInputKeyDown}
               placeholder="제목, 저자, ISBN"
+              autoComplete="off"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-controls={bookSuggestionListId}
+              aria-haspopup="listbox"
+              aria-expanded={isBookSuggestionOpen}
+              aria-activedescendant={
+                isBookSuggestionOpen && bookSuggestions[highlightedBookIndex]
+                  ? `${bookSuggestionListId}-${highlightedBookIndex}`
+                  : undefined
+              }
             />
+            {isBookSuggestionOpen && bookSuggestions.length > 0 ? (
+              <div className="book-suggestion-panel" id={bookSuggestionListId} role="listbox">
+                {bookSuggestions.map((book, index) => {
+                  const isSelected = selectedBookKey === book.isbn13;
+
+                  return (
+                    <button
+                      key={book.isbn13}
+                      id={`${bookSuggestionListId}-${index}`}
+                      className={`book-suggestion-button ${
+                        index === highlightedBookIndex ? "is-active" : ""
+                      } ${isSelected ? "is-selected" : ""}`}
+                      type="button"
+                      role="option"
+                      aria-selected={isSelected}
+                      onMouseDown={(event) => event.preventDefault()}
+                      onMouseEnter={() => setHighlightedBookIndex(index)}
+                      onClick={() => void selectBook(book)}
+                    >
+                      <strong>{book.title}</strong>
+                      <span className="book-suggestion-meta">
+                        {book.author || "저자 정보 없음"}
+                        {book.publisher ? ` · ${book.publisher}` : ""}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
           </div>
-
-          <button className="primary-button full-width" type="submit" disabled={isLoading}>
-            {isLoading ? "검색 중..." : "지도에 표시"}
-          </button>
-        </form>
-
-        <div className="minimal-status">
-          <p>{message || "입력 후 검색하면 결과가 지도에 표시됩니다."}</p>
-          {bestResult ? (
-            <div className="best-result">
-              <strong>{bestResult.library.name}</strong>
-              <span>
-                {formatDistance(bestResult.distanceKm)} · {formatEta(bestResult.etaMinutes)}
-              </span>
-            </div>
-          ) : null}
+          {isBookSuggestionLoading ? <div className="inline-loading">도서 찾는 중...</div> : null}
         </div>
+
+        {selectedBook ? (
+          <section className="selection-section selected-book-card">
+            <div className="selection-section-head">
+              <div>
+                <p className="selection-kicker">선택한 도서</p>
+                <strong>{selectedBook.title}</strong>
+              </div>
+              <span className="selection-count">{getSourceLabel(selectedResponse?.source ?? null)}</span>
+            </div>
+            <div className="selected-book-layout">
+              <BookCoverImage book={selectedBook} className="selected-book-cover" />
+              <div className="selected-book-copy">
+                <p className="selected-book-meta">
+                  {selectedBook.author || "저자 정보 없음"}
+                  {selectedBook.publisher ? ` · ${selectedBook.publisher}` : ""}
+                </p>
+                <p className="selected-book-meta">ISBN {selectedBook.isbn13}</p>
+                {selectedBook.synopsis ? <p>{selectedBook.synopsis}</p> : null}
+                {selectedBook.tags.length > 0 ? (
+                  <div className="book-tag-row">
+                    {selectedBook.tags.map((tag) => (
+                      <span key={tag} className="book-tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        {libraryResults.length > 0 ? (
+          <section className="selection-section library-candidate-section">
+            <p className="selection-kicker">가까운 도서관</p>
+            <div className="library-candidate-list">
+              {libraryResults.map((result) => (
+                <LibraryCandidateCard
+                  key={result.library.id}
+                  result={result}
+                  userLocation={visibleLocation}
+                  isSelected={selectedLibraryId === result.library.id}
+                  onSelect={setSelectedLibraryId}
+                />
+              ))}
+            </div>
+          </section>
+        ) : null}
       </div>
 
       <div className="panel-card map-panel">
-        <LibraryMap userLocation={visibleLocation} results={response?.results ?? []} />
-        <div className="map-overlay-card">
-          <span className="overlay-label">
-            {response
-              ? `${response.source === "live" ? "실데이터" : "샘플"} · ${response.results.length}곳`
-              : "지도"}
-          </span>
-          <strong>{response?.resolvedBook?.title ?? "검색 결과가 여기에 표시됩니다."}</strong>
-          <p>{overlayText}</p>
-        </div>
+        <LibraryMap
+          userLocation={visibleLocation}
+          results={selectedResponse?.results ?? []}
+          selectedLibraryId={selectedLibraryId}
+          onSelectLibrary={setSelectedLibraryId}
+        />
       </div>
     </section>
   );

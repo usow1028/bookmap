@@ -28,6 +28,7 @@ export const books: BookCandidate[] = [
     publisher: "나무옆의자",
     synopsis: "서울역 인근 편의점을 배경으로 서로 다른 사연을 가진 인물들이 관계를 회복해 가는 소설.",
     tags: ["소설", "한국문학", "베스트셀러"],
+    coverUrl: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788936434123.jpg",
   },
   {
     isbn13: "9788932473904",
@@ -36,6 +37,7 @@ export const books: BookCandidate[] = [
     publisher: "창비",
     synopsis: "감정을 느끼기 어려운 주인공이 관계와 사건을 겪으며 성장하는 청소년 소설.",
     tags: ["소설", "청소년", "성장"],
+    coverUrl: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788932473904.jpg",
   },
   {
     isbn13: "9788934985061",
@@ -44,6 +46,7 @@ export const books: BookCandidate[] = [
     publisher: "김영사",
     synopsis: "인류의 역사를 거시적으로 설명하는 대중 인문서.",
     tags: ["인문", "역사", "논픽션"],
+    coverUrl: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788934985061.jpg",
   },
   {
     isbn13: "9788937437567",
@@ -52,6 +55,7 @@ export const books: BookCandidate[] = [
     publisher: "인사이트",
     synopsis: "유지보수 가능한 소프트웨어를 위한 실천적인 코딩 원칙을 다룬 개발서.",
     tags: ["개발", "프로그래밍", "소프트웨어"],
+    coverUrl: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788937437567.jpg",
   },
 ];
 

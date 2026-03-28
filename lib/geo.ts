@@ -21,9 +21,25 @@ export function getDistanceKm(
   return EARTH_RADIUS_KM * c;
 }
 
-export function estimateTransitMinutes(distanceKm: number) {
-  const transferBuffer = 8;
-  const cityTravelSpeedKmh = 18;
+export function estimateWalkingMinutes(distanceKm: number) {
+  const walkingSpeedKmh = 4.5;
 
-  return Math.max(6, Math.round((distanceKm / cityTravelSpeedKmh) * 60 + transferBuffer));
+  return Math.max(3, Math.round((distanceKm / walkingSpeedKmh) * 60));
+}
+
+export function estimateCyclingMinutes(distanceKm: number) {
+  const cyclingSpeedKmh = 15;
+
+  return Math.max(2, Math.round((distanceKm / cyclingSpeedKmh) * 60));
+}
+
+export function estimateDrivingMinutes(distanceKm: number) {
+  const departureBuffer = 3;
+  const cityDrivingSpeedKmh = 28;
+
+  return Math.max(3, Math.round((distanceKm / cityDrivingSpeedKmh) * 60 + departureBuffer));
+}
+
+export function estimateTransitMinutes(distanceKm: number) {
+  return estimateDrivingMinutes(distanceKm);
 }

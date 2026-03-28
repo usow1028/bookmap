@@ -28,6 +28,7 @@ function readNumber(value: string | string[] | undefined) {
 export default async function HomePage({ searchParams }: HomePageProps) {
   const params = await searchParams;
   const initialQuery = readString(params.q);
+  const initialIsbn = readString(params.isbn);
   const initialLocationLabel = readString(params.location, "서울 성수동");
   const initialLat = readNumber(params.lat);
   const initialLng = readNumber(params.lng);
@@ -36,7 +37,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         label: initialLocationLabel,
         lat: initialLat,
         lng: initialLng,
-      })
+      }, initialIsbn || undefined)
     : null;
 
   return (

@@ -1,6 +1,11 @@
-import { books, holdingsByIsbn, libraries } from "@/lib/mock-data";
+import { books, defaultLocation, holdingsByIsbn, libraries } from "@/lib/mock-data";
 import { Data4LibraryError, hasData4LibraryKey, searchLiveBookmap } from "@/lib/data4library";
-import { estimateTransitMinutes, getDistanceKm } from "@/lib/geo";
+import {
+  estimateCyclingMinutes,
+  estimateDrivingMinutes,
+  estimateWalkingMinutes,
+  getDistanceKm,
+} from "@/lib/geo";
 import { resolveUserLocation } from "@/lib/location";
 import { getDrivingRouteSummary, hasNaverMapsCredentials } from "@/lib/naver-maps";
 import { BookCandidate, SearchResponse, UserLocation } from "@/lib/types";
@@ -9,25 +14,67 @@ function normalizeInput(value: string) {
   return value.trim().toLowerCase();
 }
 
-function matchBook(query: string): BookCandidate | null {
+function computeBookMatchScore(book: BookCandidate, query: string) {
+  const normalizedTitle = normalizeInput(book.title);
+  const normalizedAuthor = normalizeInput(book.author);
+  const normalizedPublisher = normalizeInput(book.publisher);
+  const normalizedTags = book.tags.map((tag) => normalizeInput(tag));
+
+  if (book.isbn13 === query) {
+    return 200;
+  }
+
+  if (normalizedTitle === query) {
+    return 160;
+  }
+
+  if (normalizedTitle.startsWith(query)) {
+    return 120;
+  }
+
+  if (normalizedTitle.includes(query)) {
+    return 100;
+  }
+
+  if (normalizedAuthor.includes(query)) {
+    return 70;
+  }
+
+  if (normalizedPublisher.includes(query)) {
+    return 50;
+  }
+
+  if (normalizedTags.some((tag) => tag.includes(query))) {
+    return 40;
+  }
+
+  return 0;
+}
+
+function searchMockBooks(query: string, limit = 8) {
   const normalized = normalizeInput(query);
 
   if (!normalized) {
-    return null;
+    return [];
   }
 
-  const exactIsbn = books.find((book) => book.isbn13 === normalized);
+  return books
+    .map((book) => ({
+      book,
+      score: computeBookMatchScore(book, normalized),
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((left, right) => right.score - left.score || left.book.title.localeCompare(right.book.title, "ko"))
+    .slice(0, limit)
+    .map((entry) => entry.book);
+}
 
-  if (exactIsbn) {
-    return exactIsbn;
-  }
-
-  const partial = books.find((book) => {
-    const candidates = [book.title, book.author, book.publisher, ...book.tags];
-    return candidates.some((candidate) => normalizeInput(candidate).includes(normalized));
-  });
-
-  return partial ?? null;
+function buildTravelTimes(distanceKm: number, carMinutes: number) {
+  return {
+    walk: estimateWalkingMinutes(distanceKm),
+    bike: estimateCyclingMinutes(distanceKm),
+    car: carMinutes,
+  };
 }
 
 function computeScore(params: {
@@ -65,12 +112,12 @@ function compareSearchResults(left: {
     return left.hasBook ? -1 : 1;
   }
 
-  if (left.distanceKm !== right.distanceKm) {
-    return left.distanceKm - right.distanceKm;
-  }
-
   if (left.etaMinutes !== right.etaMinutes) {
     return left.etaMinutes - right.etaMinutes;
+  }
+
+  if (left.distanceKm !== right.distanceKm) {
+    return left.distanceKm - right.distanceKm;
   }
 
   return right.score - left.score;
@@ -79,24 +126,53 @@ function compareSearchResults(left: {
 function searchMockBookmap(
   query: string,
   userLocation: UserLocation,
+  selectedIsbn?: string,
   warning?: string,
 ): SearchResponse {
-  const resolvedBook = matchBook(query);
+  const candidateBooks = searchMockBooks(query);
 
-  if (!resolvedBook) {
+  if (!selectedIsbn) {
     return {
       query,
+      books: candidateBooks,
       resolvedBook: null,
       location: userLocation,
       results: [],
-      warnings: warning
-        ? ["검색 결과가 없습니다.", warning]
-        : ["검색어와 일치하는 샘플 서지를 찾지 못했습니다. 제목, 저자, ISBN으로 다시 시도해 주세요."],
+      warnings:
+        candidateBooks.length > 0
+          ? warning
+            ? [warning]
+            : []
+          : [
+              "검색어와 일치하는 도서를 찾지 못했습니다. 제목, 저자, ISBN으로 다시 시도해 주세요.",
+              ...(warning ? [warning] : []),
+            ],
       source: "mock",
     };
   }
 
-  const holdings = holdingsByIsbn[resolvedBook.isbn13] ?? [];
+  const selectedBook =
+    candidateBooks.find((book) => book.isbn13 === selectedIsbn) ??
+    books.find((book) => book.isbn13 === selectedIsbn) ??
+    null;
+  const booksForResponse =
+    selectedBook && !candidateBooks.some((book) => book.isbn13 === selectedBook.isbn13)
+      ? [selectedBook, ...candidateBooks].slice(0, 8)
+      : candidateBooks;
+
+  if (!selectedBook) {
+    return {
+      query,
+      books: booksForResponse,
+      resolvedBook: null,
+      location: userLocation,
+      results: [],
+      warnings: ["선택한 도서를 찾지 못했습니다. 다시 검색해 주세요.", ...(warning ? [warning] : [])],
+      source: "mock",
+    };
+  }
+
+  const holdings = (holdingsByIsbn[selectedBook.isbn13] ?? []).filter((holding) => holding.hasBook);
 
   const results = holdings
     .map((holding) => {
@@ -107,7 +183,7 @@ function searchMockBookmap(
       }
 
       const distanceKm = getDistanceKm(userLocation, library);
-      const etaMinutes = estimateTransitMinutes(distanceKm);
+      const etaMinutes = estimateDrivingMinutes(distanceKm);
       const score = computeScore({
         distanceKm,
         etaMinutes,
@@ -119,6 +195,7 @@ function searchMockBookmap(
         library,
         distanceKm,
         etaMinutes,
+        travelTimes: buildTravelTimes(distanceKm, etaMinutes),
         hasBook: holding.hasBook,
         loanAvailable: holding.loanAvailable,
         checkedAt: holding.checkedAt,
@@ -127,14 +204,23 @@ function searchMockBookmap(
     })
     .filter((item): item is NonNullable<typeof item> => item !== null)
     .sort(compareSearchResults)
-    .slice(0, 10);
+    .slice(0, 8);
+
+  const warnings = warning ? [warning] : [];
+
+  if (results.length === 0) {
+    warnings.unshift("이 도서를 보유한 도서관을 찾지 못했습니다.");
+  } else if (!results.some((result) => result.loanAvailable)) {
+    warnings.unshift("현재 확인된 결과 중 즉시 대출 가능한 도서관이 없어 예상 소요 시간 순으로 보여줍니다.");
+  }
 
   return {
     query,
-    resolvedBook,
+    books: booksForResponse,
+    resolvedBook: selectedBook,
     location: userLocation,
     results,
-    warnings: warning ? [warning] : [],
+    warnings,
     source: "mock",
   };
 }
@@ -160,12 +246,8 @@ async function applyRouteRecommendations(
     return response;
   }
 
-  const topCount = response.source === "live" ? 5 : response.results.length;
-  const topCandidates = response.results.slice(0, topCount);
-  const rest = response.results.slice(topCount);
-
   const reranked = await Promise.all(
-    topCandidates.map(async (result) => {
+    response.results.map(async (result) => {
       try {
         const route = await getDrivingRouteSummary({
           start: response.location,
@@ -185,6 +267,7 @@ async function applyRouteRecommendations(
           ...result,
           distanceKm: route.distanceKm,
           etaMinutes: route.etaMinutes,
+          travelTimes: buildTravelTimes(route.distanceKm, route.etaMinutes),
           score,
           routePath: route.routePath,
         };
@@ -196,33 +279,66 @@ async function applyRouteRecommendations(
 
   return {
     ...response,
-    results: [...reranked, ...rest].sort(compareSearchResults),
+    results: reranked.sort(compareSearchResults),
   };
+}
+
+function getSafeUserLocation(location?: Partial<UserLocation>): UserLocation {
+  const label = location?.label?.trim() || defaultLocation.label;
+  const lat =
+    typeof location?.lat === "number" && Number.isFinite(location.lat)
+      ? location.lat
+      : defaultLocation.lat;
+  const lng =
+    typeof location?.lng === "number" && Number.isFinite(location.lng)
+      ? location.lng
+      : defaultLocation.lng;
+
+  return {
+    label,
+    lat,
+    lng,
+  };
+}
+
+function applyRouteRecommendationsSafely(response: SearchResponse) {
+  return applyRouteRecommendations(response).catch(() => response);
 }
 
 export async function searchBookmap(
   query: string,
   location?: Partial<UserLocation>,
+  selectedIsbn?: string,
 ): Promise<SearchResponse> {
-  const userLocation = await resolveUserLocation(location);
+  let userLocation = getSafeUserLocation(location);
+
+  try {
+    userLocation = await resolveUserLocation(location);
+  } catch {
+    // Keep the safe fallback location when resolution providers fail.
+  }
 
   if (!hasData4LibraryKey()) {
-    return applyRouteRecommendations(
+    return applyRouteRecommendationsSafely(
       searchMockBookmap(
         query,
         userLocation,
+        selectedIsbn,
         "실데이터 인증키가 없어 샘플 데이터를 표시합니다.",
       ),
     );
   }
 
   try {
-    return await applyRouteRecommendations(await searchLiveBookmap(query, userLocation));
+    return await applyRouteRecommendationsSafely(
+      await searchLiveBookmap(query, userLocation, selectedIsbn),
+    );
   } catch (error) {
-    return applyRouteRecommendations(
+    return applyRouteRecommendationsSafely(
       searchMockBookmap(
         query,
         userLocation,
+        selectedIsbn,
         getFallbackWarning(error),
       ),
     );

@@ -6,10 +6,38 @@ import {
   hasNaverMapsCredentials,
   reverseGeocodeWithNaver,
 } from "@/lib/naver-maps";
-import { LocationSuggestion, UserLocation } from "@/lib/types";
+import { searchPlacesWithKakaoLocal, searchPlacesWithNaverLocal } from "@/lib/place-search";
+import { LocationSuggestion, MapPoint, UserLocation } from "@/lib/types";
+import { getDistanceKm } from "@/lib/geo";
 
 function normalize(value: string) {
-  return value.trim().toLowerCase().replace(/\s+/g, "");
+  return value
+    .trim()
+    .toLowerCase()
+    .normalize("NFKC")
+    .replace(/apt/gi, "아파트")
+    .replace(/아파트단지/gi, "아파트")
+    .replace(/[()'"`.,_-]/g, "")
+    .replace(/\s+/g, "");
+}
+
+function queryLooksLikeAddress(query: string) {
+  return /(\d|로|길|번길|번지|동|읍|면|리|호)/.test(query);
+}
+
+function queryLooksLikePlace(query: string) {
+  return /(아파트|빌딩|타워|센터|병원|약국|카페|식당|마트|학교|공원|점|역|은행|시장|도서관)/.test(query);
+}
+
+function buildQueryVariants(query: string) {
+  const trimmed = query.trim();
+  const compact = trimmed.replace(/\s+/g, "");
+  const roadSpaced = trimmed.replace(/(\d(?:-\d+)?)(로|길)(\d)/g, "$1$2 $3");
+  const variants = [trimmed, compact, roadSpaced]
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  return Array.from(new Set(variants)).slice(0, 3);
 }
 
 function findPresetLocation(label: string) {
@@ -21,12 +49,76 @@ function findPresetLocation(label: string) {
   });
 }
 
-function dedupeSuggestions(suggestions: LocationSuggestion[], limit = 5) {
+function scoreSuggestion(
+  suggestion: LocationSuggestion,
+  query: string,
+  origin?: MapPoint,
+) {
+  const normalizedQuery = normalize(query);
+  const normalizedLabel = normalize(suggestion.label);
+  const normalizedDetail = normalize(suggestion.detail ?? "");
+  const isAddressQuery = queryLooksLikeAddress(query);
+  const isPlaceQuery = queryLooksLikePlace(query) || !isAddressQuery;
+  let score = 0;
+
+  if (normalizedLabel === normalizedQuery) {
+    score += 130;
+  } else if (normalizedLabel.startsWith(normalizedQuery)) {
+    score += 95;
+  } else if (normalizedLabel.includes(normalizedQuery)) {
+    score += 72;
+  }
+
+  if (normalizedDetail.includes(normalizedQuery)) {
+    score += 28;
+  }
+
+  if (suggestion.kind === "address" && isAddressQuery) {
+    score += 25;
+  }
+
+  if (suggestion.kind === "place" && isPlaceQuery) {
+    score += 25;
+  }
+
+  const sourceWeight: Record<NonNullable<LocationSuggestion["source"]>, number> = {
+    preset: 12,
+    juso: 42,
+    "naver-geocode": 34,
+    "naver-local": 36,
+    "kakao-local": 40,
+    osm: 10,
+  };
+
+  if (suggestion.source) {
+    score += sourceWeight[suggestion.source];
+  }
+
+  if (origin) {
+    const distanceKm = getDistanceKm(origin, suggestion);
+    score += Math.max(0, 18 - Math.round(distanceKm * 2.5));
+  }
+
+  return score;
+}
+
+function dedupeSuggestions(
+  suggestions: LocationSuggestion[],
+  query: string,
+  limit = 5,
+  origin?: MapPoint,
+) {
+  const ranked = suggestions
+    .map((suggestion) => ({
+      suggestion,
+      score: scoreSuggestion(suggestion, query, origin),
+    }))
+    .sort((left, right) => right.score - left.score);
   const seen = new Set<string>();
   const deduped: LocationSuggestion[] = [];
 
-  for (const suggestion of suggestions) {
-    const key = `${normalize(suggestion.label)}:${suggestion.lat.toFixed(5)}:${suggestion.lng.toFixed(5)}`;
+  for (const { suggestion } of ranked) {
+    const key = `${normalize(suggestion.label)}:${suggestion.lat.toFixed(4)}:${suggestion.lng.toFixed(4)}`;
 
     if (seen.has(key)) {
       continue;
@@ -110,9 +202,7 @@ function getAdditionValue(result: ReverseGeocodeResult | undefined, type: string
     result?.land?.addition4,
   ];
 
-  return (
-    additions.find((addition) => addition?.type === type)?.value?.trim() ?? ""
-  );
+  return additions.find((addition) => addition?.type === type)?.value?.trim() ?? "";
 }
 
 function buildJusoDetail(record: JusoAddressRecord) {
@@ -146,6 +236,8 @@ async function geocodeJusoCandidate(record: JusoAddressRecord): Promise<Location
     detail: buildJusoDetail(record),
     lat: candidate.lat,
     lng: candidate.lng,
+    kind: "address",
+    source: "juso",
   };
 }
 
@@ -177,88 +269,118 @@ function buildNominatimSuggestion(payload: {
     detail,
     lat,
     lng,
+    kind: queryLooksLikeAddress(label) ? "address" : "place",
+    source: "osm",
   };
 }
 
-export async function suggestLocations(query: string, limit = 5) {
-  const trimmed = query.trim();
-
-  if (trimmed.length < 2) {
-    return [];
+async function searchNaverGeocodeSuggestions(query: string, limit: number) {
+  if (!hasNaverMapsCredentials()) {
+    return [] as LocationSuggestion[];
   }
 
+  const suggestions = await geocodeSuggestionsWithNaver(query, limit);
+
+  return suggestions.map((suggestion) => ({
+    ...suggestion,
+    kind: "address" as const,
+    source: "naver-geocode" as const,
+  }));
+}
+
+async function searchNominatimSuggestions(query: string, limit: number) {
+  const url = new URL("https://nominatim.openstreetmap.org/search");
+  url.searchParams.set("q", query);
+  url.searchParams.set("format", "jsonv2");
+  url.searchParams.set("limit", String(limit));
+  url.searchParams.set("countrycodes", "kr");
+  url.searchParams.set("addressdetails", "1");
+
+  const response = await fetch(url, {
+    headers: {
+      "accept-language": "ko,en",
+      "user-agent": "bookmap-prototype/0.1",
+    },
+    next: {
+      revalidate: 3600,
+    },
+  });
+
+  if (!response.ok) {
+    return [] as LocationSuggestion[];
+  }
+
+  const payload = (await response.json()) as Array<{
+    display_name?: string;
+    lat?: string;
+    lon?: string;
+    name?: string;
+  }>;
+
+  return payload
+    .map((candidate) => buildNominatimSuggestion(candidate))
+    .filter((candidate): candidate is LocationSuggestion => Boolean(candidate));
+}
+
+async function collectLocationSuggestions(query: string, limit: number, origin?: MapPoint) {
+  const variants = buildQueryVariants(query);
   const presetSuggestions = sampleLocations
     .filter((location) => {
       const candidate = normalize(location.label);
-      const search = normalize(trimmed);
+      const search = normalize(query);
       return candidate.includes(search) || search.includes(candidate);
     })
     .map((location) => ({
       label: location.label,
       lat: location.lat,
       lng: location.lng,
+      kind: "preset" as const,
+      source: "preset" as const,
     }));
 
-  if (hasJusoApiKey() && hasNaverMapsCredentials()) {
-    try {
-      const jusoCandidates = await searchJusoAddresses(trimmed, limit);
-      const jusoSuggestions = (
-        await Promise.all(jusoCandidates.map((candidate) => geocodeJusoCandidate(candidate)))
-      ).filter((candidate): candidate is LocationSuggestion => Boolean(candidate));
+  const tasks: Array<Promise<LocationSuggestion[]>> = [Promise.resolve(presetSuggestions)];
 
-      if (jusoSuggestions.length > 0) {
-        return dedupeSuggestions([...presetSuggestions, ...jusoSuggestions], limit);
-      }
-    } catch {
-      // Ignore Juso failures and continue with NAVER or the secondary provider.
+  for (const variant of variants) {
+    if (hasJusoApiKey() && hasNaverMapsCredentials()) {
+      tasks.push(
+        searchJusoAddresses(variant, limit)
+          .then((records) => Promise.all(records.map((record) => geocodeJusoCandidate(record))))
+          .then((candidates) => candidates.filter((candidate): candidate is LocationSuggestion => Boolean(candidate)))
+          .catch(() => [] as LocationSuggestion[]),
+      );
     }
+
+    if (hasNaverMapsCredentials()) {
+      tasks.push(searchNaverGeocodeSuggestions(variant, limit).catch(() => [] as LocationSuggestion[]));
+    }
+
+    tasks.push(searchPlacesWithNaverLocal(variant, limit).catch(() => [] as LocationSuggestion[]));
+    tasks.push(searchPlacesWithKakaoLocal(variant, limit, origin).catch(() => [] as LocationSuggestion[]));
   }
 
-  if (hasNaverMapsCredentials()) {
-    try {
-      const suggestions = await geocodeSuggestionsWithNaver(trimmed, limit);
-      return dedupeSuggestions([...presetSuggestions, ...suggestions], limit);
-    } catch {
-      // Ignore NAVER suggestion failures and fall back to the secondary provider.
-    }
+  const settled = await Promise.all(tasks);
+  const merged = settled.flat();
+
+  if (merged.length > 0) {
+    return dedupeSuggestions(merged, query, limit, origin);
   }
 
   try {
-    const url = new URL("https://nominatim.openstreetmap.org/search");
-    url.searchParams.set("q", trimmed);
-    url.searchParams.set("format", "jsonv2");
-    url.searchParams.set("limit", String(limit));
-    url.searchParams.set("countrycodes", "kr");
-    url.searchParams.set("addressdetails", "1");
-
-    const response = await fetch(url, {
-      headers: {
-        "accept-language": "ko,en",
-        "user-agent": "bookmap-prototype/0.1",
-      },
-      next: {
-        revalidate: 3600,
-      },
-    });
-
-    if (response.ok) {
-      const payload = (await response.json()) as Array<{
-        display_name?: string;
-        lat?: string;
-        lon?: string;
-        name?: string;
-      }>;
-      const suggestions = payload
-        .map((candidate) => buildNominatimSuggestion(candidate))
-        .filter((candidate): candidate is LocationSuggestion => Boolean(candidate));
-
-      return dedupeSuggestions([...presetSuggestions, ...suggestions], limit);
-    }
+    const fallback = await searchNominatimSuggestions(query, limit);
+    return dedupeSuggestions([...presetSuggestions, ...fallback], query, limit, origin);
   } catch {
-    // Ignore secondary suggestion failures and return the preset matches only.
+    return dedupeSuggestions(presetSuggestions, query, limit, origin);
+  }
+}
+
+export async function suggestLocations(query: string, limit = 5, origin?: MapPoint) {
+  const trimmed = query.trim();
+
+  if (trimmed.length < 2) {
+    return [];
   }
 
-  return dedupeSuggestions(presetSuggestions, limit);
+  return collectLocationSuggestions(trimmed, limit, origin);
 }
 
 export async function reverseLookupLocationLabel(location: UserLocation) {
@@ -289,6 +411,8 @@ export async function reverseLookupLocationLabel(location: UserLocation) {
           detail: detail || undefined,
           lat: location.lat,
           lng: location.lng,
+          kind: "address" as const,
+          source: "naver-geocode" as const,
         };
       }
     } catch {
@@ -339,6 +463,7 @@ export async function reverseLookupLocationLabel(location: UserLocation) {
     label: `현재 위치 (${location.lat.toFixed(5)}, ${location.lng.toFixed(5)})`,
     lat: location.lat,
     lng: location.lng,
+    kind: "address" as const,
   };
 }
 
@@ -388,76 +513,18 @@ export async function resolveUserLocation(
     return preset;
   }
 
-  if (hasJusoApiKey() && hasNaverMapsCredentials()) {
-    try {
-      const [officialCandidate] = await searchJusoAddresses(label, 1);
-      const resolved = officialCandidate ? await geocodeJusoCandidate(officialCandidate) : null;
-
-      if (resolved) {
-        return {
-          label: resolved.label,
-          lat: resolved.lat,
-          lng: resolved.lng,
-        };
-      }
-    } catch {
-      // Ignore Juso failures and fall back to direct geocoding.
-    }
-  }
-
-  if (hasNaverMapsCredentials()) {
-    try {
-      const candidate = await geocodeWithNaver(label);
-
-      if (candidate) {
-        return {
-          label,
-          lat: candidate.lat,
-          lng: candidate.lng,
-        };
-      }
-    } catch {
-      // Ignore NAVER geocoding failures and fall back to the secondary provider.
-    }
-  }
-
   try {
-    const url = new URL("https://nominatim.openstreetmap.org/search");
-    url.searchParams.set("q", label);
-    url.searchParams.set("format", "jsonv2");
-    url.searchParams.set("limit", "1");
-    url.searchParams.set("countrycodes", "kr");
+    const [bestCandidate] = await suggestLocations(label, 1, defaultLocation);
 
-    const response = await fetch(url, {
-      headers: {
-        "accept-language": "ko,en",
-        "user-agent": "bookmap-prototype/0.1",
-      },
-      next: {
-        revalidate: 3600,
-      },
-    });
-
-    if (response.ok) {
-      const payload = (await response.json()) as Array<{
-        lat?: string;
-        lon?: string;
-        display_name?: string;
-      }>;
-      const candidate = payload[0];
-      const lat = Number(candidate?.lat);
-      const lng = Number(candidate?.lon);
-
-      if (Number.isFinite(lat) && Number.isFinite(lng)) {
-        return {
-          label,
-          lat,
-          lng,
-        };
-      }
+    if (bestCandidate) {
+      return {
+        label: bestCandidate.label,
+        lat: bestCandidate.lat,
+        lng: bestCandidate.lng,
+      };
     }
   } catch {
-    // Ignore geocoding errors and fall back to the default center.
+    // Ignore combined location search failures and fall back to the default center.
   }
 
   return {

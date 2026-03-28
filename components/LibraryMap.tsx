@@ -11,8 +11,22 @@ const LibraryMapClient = dynamic(() => import("@/components/LibraryMapClient"), 
 type LibraryMapProps = {
   userLocation: UserLocation;
   results: SearchResult[];
+  selectedLibraryId?: string | null;
+  onSelectLibrary?: (libraryId: string) => void;
 };
 
-export function LibraryMap({ userLocation, results }: LibraryMapProps) {
-  return <LibraryMapClient userLocation={userLocation} results={results} />;
+export function LibraryMap({
+  userLocation,
+  results,
+  selectedLibraryId,
+  onSelectLibrary,
+}: LibraryMapProps) {
+  return (
+    <LibraryMapClient
+      userLocation={userLocation}
+      results={results}
+      selectedLibraryId={selectedLibraryId}
+      onSelectLibrary={onSelectLibrary}
+    />
+  );
 }

@@ -10,6 +10,14 @@ export type LocationSuggestion = {
   detail?: string;
   lat: number;
   lng: number;
+  kind?: "preset" | "address" | "place";
+  source?:
+    | "preset"
+    | "juso"
+    | "naver-geocode"
+    | "naver-local"
+    | "kakao-local"
+    | "osm";
 };
 
 export type MapPoint = {
@@ -24,6 +32,8 @@ export type BookCandidate = {
   publisher: string;
   synopsis: string;
   tags: string[];
+  coverUrl?: string;
+  detailUrl?: string;
 };
 
 export type LibraryHolding = {
@@ -48,6 +58,11 @@ export type SearchResult = {
   library: LibraryRecord;
   distanceKm: number;
   etaMinutes: number;
+  travelTimes: {
+    walk: number;
+    bike: number;
+    car: number;
+  };
   hasBook: boolean;
   loanAvailable: boolean;
   checkedAt: string;
@@ -57,6 +72,7 @@ export type SearchResult = {
 
 export type SearchResponse = {
   query: string;
+  books: BookCandidate[];
   resolvedBook: BookCandidate | null;
   location: UserLocation;
   results: SearchResult[];

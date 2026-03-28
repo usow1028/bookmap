@@ -1,7 +1,12 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { XMLParser } from "fast-xml-parser";
-import { estimateTransitMinutes, getDistanceKm } from "@/lib/geo";
+import {
+  estimateCyclingMinutes,
+  estimateDrivingMinutes,
+  estimateWalkingMinutes,
+  getDistanceKm,
+} from "@/lib/geo";
 import { resolveRegionCode } from "@/lib/region";
 import { BookCandidate, LibraryRecord, SearchResponse, SearchResult, UserLocation } from "@/lib/types";
 
@@ -56,6 +61,18 @@ function readText(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function readFirstText(source: Record<string, unknown>, keys: string[]) {
+  for (const key of keys) {
+    const value = readText(source[key]);
+
+    if (value) {
+      return value;
+    }
+  }
+
+  return "";
+}
+
 function readNumber(value: unknown) {
   const numeric = Number(readText(value));
   return Number.isFinite(numeric) ? numeric : null;
@@ -90,12 +107,12 @@ function compareSearchResults(left: SearchResult, right: SearchResult) {
     return left.hasBook ? -1 : 1;
   }
 
-  if (left.distanceKm !== right.distanceKm) {
-    return left.distanceKm - right.distanceKm;
-  }
-
   if (left.etaMinutes !== right.etaMinutes) {
     return left.etaMinutes - right.etaMinutes;
+  }
+
+  if (left.distanceKm !== right.distanceKm) {
+    return left.distanceKm - right.distanceKm;
   }
 
   return right.score - left.score;
@@ -116,6 +133,14 @@ function getCheckedAtLabel() {
     day: "2-digit",
     timeZone: "Asia/Seoul",
   }).format(previousDay);
+}
+
+function buildTravelTimes(distanceKm: number, carMinutes: number) {
+  return {
+    walk: estimateWalkingMinutes(distanceKm),
+    bike: estimateCyclingMinutes(distanceKm),
+    car: carMinutes,
+  };
 }
 
 async function fetchXml(endpoint: string, params: Record<string, string | number | undefined>) {
@@ -164,38 +189,69 @@ async function fetchXml(endpoint: string, params: Record<string, string | number
   return body;
 }
 
-async function searchBookCandidate(query: string) {
+function mapDocToBookCandidate(doc: Record<string, unknown>): BookCandidate | null {
+  const isbn13 = readText(doc.isbn13);
+  const title = readText(doc.bookname);
+
+  if (!isbn13 || !title) {
+    return null;
+  }
+
+  return {
+    isbn13,
+    title,
+    author: readText(doc.authors),
+    publisher: readText(doc.publisher),
+    synopsis: "",
+    tags: [readText(doc.class_nm)].filter(Boolean),
+    coverUrl: readFirstText(doc, ["bookImageURL", "bookImageUrl", "bookimageURL", "bookimageUrl"]) || undefined,
+    detailUrl: readFirstText(doc, ["bookDtlUrl", "bookDtlURL", "bookDetailUrl"]) || undefined,
+  };
+}
+
+async function searchBookCandidates(query: string, limit = 8) {
   const trimmed = query.trim();
 
   if (!trimmed) {
-    return null;
+    return [];
   }
 
   const body = await fetchXml("srchBooks", {
     isbn13: /^\d{13}$/.test(trimmed) ? trimmed : undefined,
     keyword: /^\d{13}$/.test(trimmed) ? undefined : trimmed,
     pageNo: 1,
-    pageSize: 5,
+    pageSize: limit,
     exactMatch: "false",
   });
 
   const docs = asArray(
     (body.docs as { doc?: Record<string, unknown> | Array<Record<string, unknown>> } | undefined)?.doc,
   );
-  const first = docs[0];
 
-  if (!first) {
+  return docs
+    .map((doc) => mapDocToBookCandidate(doc))
+    .filter((candidate): candidate is BookCandidate => Boolean(candidate));
+}
+
+async function fetchBookCandidateByIsbn(isbn13: string) {
+  const trimmed = isbn13.trim();
+
+  if (!trimmed) {
     return null;
   }
 
-  return {
-    isbn13: readText(first.isbn13),
-    title: readText(first.bookname),
-    author: readText(first.authors),
-    publisher: readText(first.publisher),
-    synopsis: "",
-    tags: [readText(first.class_nm)].filter(Boolean),
-  } satisfies BookCandidate;
+  const body = await fetchXml("srchBooks", {
+    isbn13: trimmed,
+    pageNo: 1,
+    pageSize: 1,
+    exactMatch: "true",
+  });
+
+  const docs = asArray(
+    (body.docs as { doc?: Record<string, unknown> | Array<Record<string, unknown>> } | undefined)?.doc,
+  );
+
+  return mapDocToBookCandidate(docs[0] ?? {});
 }
 
 async function fetchLibrariesByBook(isbn13: string, regionCode: string) {
@@ -248,27 +304,11 @@ async function fetchAvailability(libraryId: string, isbn13: string) {
   };
 }
 
-export async function searchLiveBookmap(
-  query: string,
-  userLocation: UserLocation,
-): Promise<SearchResponse> {
+async function buildLiveResults(resolvedBook: BookCandidate, userLocation: UserLocation) {
   const regionCode = await resolveRegionCode(userLocation);
 
   if (!regionCode) {
     throw new Data4LibraryError("upstream", "지역 코드를 확인하지 못했습니다.");
-  }
-
-  const resolvedBook = await searchBookCandidate(query);
-
-  if (!resolvedBook) {
-    return {
-      query,
-      resolvedBook: null,
-      location: userLocation,
-      results: [],
-      warnings: [],
-      source: "live",
-    };
   }
 
   const libraryCandidates = await fetchLibrariesByBook(resolvedBook.isbn13, regionCode);
@@ -278,7 +318,7 @@ export async function searchLiveBookmap(
       distanceKm: getDistanceKm(userLocation, library),
     }))
     .sort((left, right) => left.distanceKm - right.distanceKm)
-    .slice(0, 12);
+    .slice(0, 8);
 
   const checkedAt = getCheckedAtLabel();
   let partialAvailability = false;
@@ -286,14 +326,16 @@ export async function searchLiveBookmap(
   const results = (
     await Promise.all(
       nearestLibraries.map(async ({ library, distanceKm }) => {
+        const etaMinutes = estimateDrivingMinutes(distanceKm);
+
         try {
           const availability = await fetchAvailability(library.id, resolvedBook.isbn13);
-          const etaMinutes = estimateTransitMinutes(distanceKm);
 
           return {
             library,
             distanceKm,
             etaMinutes,
+            travelTimes: buildTravelTimes(distanceKm, etaMinutes),
             hasBook: availability.hasBook,
             loanAvailable: availability.loanAvailable,
             checkedAt,
@@ -307,12 +349,11 @@ export async function searchLiveBookmap(
         } catch {
           partialAvailability = true;
 
-          const etaMinutes = estimateTransitMinutes(distanceKm);
-
           return {
             library,
             distanceKm,
             etaMinutes,
+            travelTimes: buildTravelTimes(distanceKm, etaMinutes),
             hasBook: true,
             loanAvailable: false,
             checkedAt,
@@ -326,16 +367,68 @@ export async function searchLiveBookmap(
         }
       }),
     )
-  ).sort(compareSearchResults);
+  )
+    .filter((result) => result.hasBook)
+    .sort(compareSearchResults);
 
   const warnings = partialAvailability ? ["일부 대출 가능 여부 확인이 지연되었습니다."] : [];
 
-  if (!results.some((result) => result.loanAvailable)) {
-    warnings.unshift("현재 확인된 결과 중 즉시 대출 가능한 도서관이 없어 가까운 소장 도서관 순으로 보여줍니다.");
+  if (results.length === 0) {
+    warnings.unshift("이 도서를 보유한 도서관을 찾지 못했습니다.");
+  } else if (!results.some((result) => result.loanAvailable)) {
+    warnings.unshift("현재 확인된 결과 중 즉시 대출 가능한 도서관이 없어 예상 소요 시간 순으로 보여줍니다.");
   }
 
   return {
+    results,
+    warnings,
+  };
+}
+
+export async function searchLiveBookmap(
+  query: string,
+  userLocation: UserLocation,
+  selectedIsbn?: string,
+): Promise<SearchResponse> {
+  const books = await searchBookCandidates(query);
+
+  if (!selectedIsbn) {
+    return {
+      query,
+      books,
+      resolvedBook: null,
+      location: userLocation,
+      results: [],
+      warnings: books.length > 0 ? [] : ["검색 결과가 없습니다."],
+      source: "live",
+    };
+  }
+
+  const selectedFromList = books.find((book) => book.isbn13 === selectedIsbn) ?? null;
+  const selectedFallback = selectedFromList ? null : await fetchBookCandidateByIsbn(selectedIsbn);
+  const resolvedBook = selectedFromList ?? selectedFallback;
+  const candidateBooks =
+    selectedFallback && !books.some((book) => book.isbn13 === selectedFallback.isbn13)
+      ? [selectedFallback, ...books].slice(0, 8)
+      : books;
+
+  if (!resolvedBook) {
+    return {
+      query,
+      books: candidateBooks,
+      resolvedBook: null,
+      location: userLocation,
+      results: [],
+      warnings: ["선택한 도서를 찾지 못했습니다. 다시 검색해 주세요."],
+      source: "live",
+    };
+  }
+
+  const { results, warnings } = await buildLiveResults(resolvedBook, userLocation);
+
+  return {
     query,
+    books: candidateBooks,
     resolvedBook,
     location: userLocation,
     results,
