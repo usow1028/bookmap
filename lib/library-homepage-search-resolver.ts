@@ -33,6 +33,11 @@ type SearchRequestAdapter = {
   resolve: (context: ResolverContext) => Promise<LibrarySearchRequest | null> | LibrarySearchRequest | null;
 };
 
+type KnownLibrarySearchResolver = (
+  homepageUrl: URL,
+  searchTerm: string,
+) => LibrarySearchRequest | null;
+
 type KeywordInputCandidate = {
   label: string;
   name: string;
@@ -541,130 +546,60 @@ function buildBusanMiracleLibrarySearchRequest(searchTerm: string) {
   );
 }
 
+function createSearchTermOnlyKnownResolver(
+  builder: (searchTerm: string) => LibrarySearchRequest,
+): KnownLibrarySearchResolver {
+  return (_homepageUrl, searchTerm) => builder(searchTerm);
+}
+
+function createHomepageAwareKnownResolver(
+  builder: (homepageUrl: URL, searchTerm: string) => LibrarySearchRequest | null,
+): KnownLibrarySearchResolver {
+  return (homepageUrl, searchTerm) => builder(homepageUrl, searchTerm);
+}
+
+function createHomepageAwareKnownResolverWithFallback(
+  builder: (homepageUrl: URL, searchTerm: string) => LibrarySearchRequest | null,
+): KnownLibrarySearchResolver {
+  return (homepageUrl, searchTerm) => builder(homepageUrl, searchTerm) ?? buildFallbackRequest(homepageUrl);
+}
+
+const KNOWN_LIBRARY_SEARCH_RESOLVERS: Record<string, KnownLibrarySearchResolver> = {
+  "library.gangnam.go.kr": createHomepageAwareKnownResolverWithFallback(buildGangnamLibrarySearchRequest),
+  "junggulib.or.kr": createHomepageAwareKnownResolver(buildJungguLibrarySearchRequest),
+  "sdlib.or.kr": createHomepageAwareKnownResolver(buildSeongdongLibrarySearchRequest),
+  "lib.yangcheon.or.kr": createHomepageAwareKnownResolverWithFallback(buildYangcheonLibrarySearchRequest),
+  "lib.gwanak.go.kr": createHomepageAwareKnownResolver(buildGwanakLibrarySearchRequest),
+  "lib.sdm.or.kr": createHomepageAwareKnownResolver(buildSeodaemunLibrarySearchRequest),
+  "l4d.or.kr": createHomepageAwareKnownResolver(buildDongdaemunLibrarySearchRequest),
+  "mplib.mapo.go.kr": createHomepageAwareKnownResolver(buildMapoLibrarySearchRequest),
+  "lib.gimhae.go.kr": createSearchTermOnlyKnownResolver(buildGimhaeLibrarySearchRequest),
+  "bcl.go.kr": createSearchTermOnlyKnownResolver(buildBucheonLibrarySearchRequest),
+  "apl.go.kr": createSearchTermOnlyKnownResolver(buildAnseongLibrarySearchRequest),
+  "lib.dongjak.go.kr": createSearchTermOnlyKnownResolver(buildDongjakLibrarySearchRequest),
+  "gjl.gimje.go.kr": createSearchTermOnlyKnownResolver(buildGimjeLibrarySearchRequest),
+  "library.cheongju.go.kr": createSearchTermOnlyKnownResolver(buildCheongjuLibrarySearchRequest),
+  "uilib.go.kr": createSearchTermOnlyKnownResolver(buildUijeongbuLibrarySearchRequest),
+  "library.donggu.ulsan.kr": createSearchTermOnlyKnownResolver(buildDongguUlsanLibrarySearchRequest),
+  "lib.chungju.go.kr": createSearchTermOnlyKnownResolver(buildChungjuLibrarySearchRequest),
+  "lib.gjcity.go.kr": createSearchTermOnlyKnownResolver(buildGwangjuSmallLibrarySearchRequest),
+  "dangjin.go.kr": createSearchTermOnlyKnownResolver(buildDangjinLibrarySearchRequest),
+  "lib.siheung.go.kr": createHomepageAwareKnownResolver(buildPyxisHashSearchRequest),
+  "seogu.go.kr": createHomepageAwareKnownResolver(buildSeoguLibrarySearchRequest),
+  "eplib.or.kr": createSearchTermOnlyKnownResolver(buildEunpyeongLibrarySearchRequest),
+  "yplib.go.kr": createSearchTermOnlyKnownResolver(buildYangpyeongLibrarySearchRequest),
+  "geumcheonlib.seoul.kr": createSearchTermOnlyKnownResolver(buildGeumcheonLibrarySearchRequest),
+  "lib.eumseong.go.kr": createSearchTermOnlyKnownResolver(buildEumseongLibrarySearchRequest),
+  "pc.go.kr": createSearchTermOnlyKnownResolver(buildPyeongchangLibrarySearchRequest),
+  "lib.uljin.go.kr": createSearchTermOnlyKnownResolver(buildUljinLibrarySearchRequest),
+  "lib.wanju.go.kr": createSearchTermOnlyKnownResolver(buildWanjuLibrarySearchRequest),
+  "library.bsgangseo.go.kr": createSearchTermOnlyKnownResolver(buildBusanMiracleLibrarySearchRequest),
+  "splib.or.kr": createHomepageAwareKnownResolverWithFallback(buildSongpaLibrarySearchRequest),
+};
+
 function resolveKnownLibraryHomepageSearchRequest(homepageUrl: URL, searchTerm: string) {
   const hostname = homepageUrl.hostname.replace(/^www\./i, "").toLowerCase();
-
-  if (hostname === "library.gangnam.go.kr") {
-    return buildGangnamLibrarySearchRequest(homepageUrl, searchTerm) ?? buildFallbackRequest(homepageUrl);
-  }
-
-  if (hostname === "junggulib.or.kr") {
-    return buildJungguLibrarySearchRequest(homepageUrl, searchTerm);
-  }
-
-  if (hostname === "sdlib.or.kr") {
-    return buildSeongdongLibrarySearchRequest(homepageUrl, searchTerm);
-  }
-
-  if (hostname === "lib.yangcheon.or.kr") {
-    return buildYangcheonLibrarySearchRequest(homepageUrl, searchTerm) ?? buildFallbackRequest(homepageUrl);
-  }
-
-  if (hostname === "lib.gwanak.go.kr") {
-    return buildGwanakLibrarySearchRequest(homepageUrl, searchTerm);
-  }
-
-  if (hostname === "lib.sdm.or.kr") {
-    return buildSeodaemunLibrarySearchRequest(homepageUrl, searchTerm);
-  }
-
-  if (hostname === "l4d.or.kr") {
-    return buildDongdaemunLibrarySearchRequest(homepageUrl, searchTerm);
-  }
-
-  if (hostname === "mplib.mapo.go.kr") {
-    return buildMapoLibrarySearchRequest(homepageUrl, searchTerm);
-  }
-
-  if (hostname === "lib.gimhae.go.kr") {
-    return buildGimhaeLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "bcl.go.kr") {
-    return buildBucheonLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "apl.go.kr") {
-    return buildAnseongLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "lib.dongjak.go.kr") {
-    return buildDongjakLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "gjl.gimje.go.kr") {
-    return buildGimjeLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "library.cheongju.go.kr") {
-    return buildCheongjuLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "uilib.go.kr") {
-    return buildUijeongbuLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "library.donggu.ulsan.kr") {
-    return buildDongguUlsanLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "lib.chungju.go.kr") {
-    return buildChungjuLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "lib.gjcity.go.kr") {
-    return buildGwangjuSmallLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "dangjin.go.kr") {
-    return buildDangjinLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "lib.siheung.go.kr") {
-    return buildPyxisHashSearchRequest(homepageUrl, searchTerm);
-  }
-
-  if (hostname === "seogu.go.kr") {
-    return buildSeoguLibrarySearchRequest(homepageUrl, searchTerm);
-  }
-
-  if (hostname === "eplib.or.kr") {
-    return buildEunpyeongLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "yplib.go.kr") {
-    return buildYangpyeongLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "geumcheonlib.seoul.kr") {
-    return buildGeumcheonLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "lib.eumseong.go.kr") {
-    return buildEumseongLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "pc.go.kr") {
-    return buildPyeongchangLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "lib.uljin.go.kr") {
-    return buildUljinLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "lib.wanju.go.kr") {
-    return buildWanjuLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "library.bsgangseo.go.kr") {
-    return buildBusanMiracleLibrarySearchRequest(searchTerm);
-  }
-
-  if (hostname === "splib.or.kr") {
-    return buildSongpaLibrarySearchRequest(homepageUrl, searchTerm) ?? buildFallbackRequest(homepageUrl);
-  }
-
-  return null;
+  return KNOWN_LIBRARY_SEARCH_RESOLVERS[hostname]?.(homepageUrl, searchTerm) ?? null;
 }
 
 function decodeHtmlEntities(value: string) {
