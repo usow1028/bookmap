@@ -37,6 +37,12 @@ type PyxisSearchResponse = {
   } | null;
 };
 
+type PyxisBranchesResponse = {
+  data?: {
+    list?: PyxisBranch[] | null;
+  } | null;
+};
+
 type PyxisBranch = {
   id?: number;
   name?: string;
@@ -263,16 +269,20 @@ async function resolvePyxisConfig(homepage: string) {
   }
 }
 
-function buildPyxisSearchUrl(config: PyxisConfig, isbn13: string) {
+function buildPyxisSearchUrl(config: PyxisConfig, searchTerm: string) {
   const url = new URL(
     `${config.homePageId}/collections/${config.collectionId}/search`,
     config.apiUrl,
   );
 
-  url.searchParams.set("all", `1|k|a|${isbn13}`);
+  url.searchParams.set("all", `1|k|a|${searchTerm}`);
   url.searchParams.set("facet", "false");
   url.searchParams.set("max", "100");
   return url;
+}
+
+function buildPyxisBranchesUrl(config: PyxisConfig) {
+  return new URL(`${config.homePageId}/branches`, config.apiUrl);
 }
 
 function buildPyxisItemsUrl(config: PyxisConfig, biblioId: number, branchId: number) {
@@ -325,8 +335,29 @@ function collectMatchedPyxisBranches(
   return dedupeMatchedBranches(matches);
 }
 
-async function fetchPyxisSearchBiblios(config: PyxisConfig, isbn13: string) {
-  const payload = await fetchJson<PyxisSearchResponse>(buildPyxisSearchUrl(config, isbn13));
+function mergePyxisSearchBiblios(groups: PyxisSearchBiblio[][]) {
+  const merged = new Map<number, PyxisSearchBiblio>();
+
+  for (const group of groups) {
+    for (const biblio of group) {
+      if (!biblio.id) {
+        continue;
+      }
+
+      merged.set(biblio.id, biblio);
+    }
+  }
+
+  return Array.from(merged.values());
+}
+
+async function fetchPyxisSearchBiblios(config: PyxisConfig, searchTerm: string) {
+  const payload = await fetchJson<PyxisSearchResponse>(buildPyxisSearchUrl(config, searchTerm));
+  return payload.data?.list ?? [];
+}
+
+async function fetchPyxisBranches(config: PyxisConfig) {
+  const payload = await fetchJson<PyxisBranchesResponse>(buildPyxisBranchesUrl(config));
   return payload.data?.list ?? [];
 }
 
@@ -335,6 +366,19 @@ async function fetchPyxisItems(config: PyxisConfig, match: MatchedPyxisBranch) {
     buildPyxisItemsUrl(config, match.biblioId, match.branchId),
   );
   return payload.data?.list ?? [];
+}
+
+function summarizePyxisCatalogMiss(library: LibraryRecord): HomepageAvailability {
+  return {
+    hasBook: true,
+    loanAvailable: false,
+    reservationAvailable: false,
+    availabilityChecked: false,
+    availabilityStatus: "unknown",
+    availabilitySource: "homepage",
+    availabilityDetail: `${library.name} 분관 레코드를 홈페이지 검색에서 찾지 못했습니다.`,
+    checkedAt: buildHomepageCheckedAtLabel(),
+  };
 }
 
 function summarizePyxisSearchOnly(matches: MatchedPyxisBranch[]): HomepageAvailability | null {
@@ -418,11 +462,17 @@ export async function resolveHomepageAvailability(
     return null;
   }
 
-  const searchBiblios = await fetchPyxisSearchBiblios(config, book.isbn13);
+  const searchTerms = Array.from(new Set([book.isbn13.trim(), book.title.trim()].filter(Boolean)));
+  const searchBiblios = mergePyxisSearchBiblios(
+    await Promise.all(searchTerms.map((searchTerm) => fetchPyxisSearchBiblios(config, searchTerm))),
+  );
   const matchedBranches = collectMatchedPyxisBranches(library, book.isbn13, searchBiblios);
 
   if (matchedBranches.length === 0) {
-    return null;
+    const branches = await fetchPyxisBranches(config).catch(() => []);
+    return branches.some((branch) => isMatchingLibraryName(library.name, branch.name?.trim() ?? ""))
+      ? summarizePyxisCatalogMiss(library)
+      : null;
   }
 
   const itemGroups = await Promise.all(
