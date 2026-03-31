@@ -337,7 +337,7 @@ function computeScore(params: {
   hasBook: boolean;
 }) {
   const holdingWeight = params.hasBook ? 25 : 0;
-  const loanWeight = params.loanAvailable ? 30 : -10;
+  const loanWeight = params.loanAvailable ? 6 : 0;
   const distancePenalty = params.distanceKm * 4.2;
   const etaPenalty = params.etaMinutes * 0.7;
 
@@ -345,10 +345,6 @@ function computeScore(params: {
 }
 
 function compareSearchResults(left: SearchResult, right: SearchResult) {
-  if (left.loanAvailable !== right.loanAvailable) {
-    return left.loanAvailable ? -1 : 1;
-  }
-
   if (left.availabilityChecked !== right.availabilityChecked) {
     return left.availabilityChecked ? -1 : 1;
   }
@@ -641,7 +637,7 @@ async function buildLiveResults(resolvedBook: BookCandidate, userLocation: UserL
   if (results.length === 0) {
     warnings.unshift("이 도서를 보유한 도서관을 찾지 못했습니다.");
   } else if (!results.some((result) => result.loanAvailable)) {
-    warnings.unshift("현재 확인된 결과 중 즉시 대출 가능한 도서관이 없어 예상 소요 시간 순으로 보여줍니다.");
+    warnings.unshift("정보나루 전일 기준으로는 대출 가능 도서관이 없어 예상 소요 시간 순으로 보여줍니다.");
   }
 
   return {

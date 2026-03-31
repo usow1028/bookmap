@@ -476,6 +476,13 @@ input {
   line-height: 1.4;
 }
 
+.library-candidate-note {
+  margin: -2px 0 0;
+  color: rgba(23, 53, 77, 0.72);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
 .library-candidate-times {
   display: flex;
   flex-wrap: wrap;

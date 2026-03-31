@@ -23,13 +23,16 @@ export function LibraryCandidateCard({
   const availabilityLabel = !result.availabilityChecked
     ? "확인 필요"
     : result.loanAvailable
-      ? "대출 가능"
-      : "대출 불가";
+      ? "정보나루 기준 가능"
+      : "정보나루 기준 불가";
   const availabilityClassName = !result.availabilityChecked
     ? "is-unknown"
     : result.loanAvailable
       ? "is-available"
       : "is-unavailable";
+  const availabilityNote = !result.availabilityChecked
+    ? "대출 상태를 확인하지 못했습니다. 예약하기에서 다시 확인해 주세요."
+    : `정보나루 전일 기준 ${result.checkedAt} · 예약하기에서 실제 상태를 다시 확인해 주세요.`;
   const handleActivate = () => onSelect(result.library.id);
   const openRoute = () =>
     openNaverMapRoute({
@@ -68,6 +71,7 @@ export function LibraryCandidateCard({
       </div>
 
       <p className="library-candidate-address">{result.library.address}</p>
+      <p className="library-candidate-note">{availabilityNote}</p>
 
       <div className="library-candidate-times">
         <span>도보 {formatEta(result.travelTimes.walk)}</span>

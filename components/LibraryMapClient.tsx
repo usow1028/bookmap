@@ -351,13 +351,14 @@ export default function LibraryMapClient({
       const isSelected = result.library.id === focusedResult?.library.id;
       const position = new naver.maps.LatLng(result.library.lat, result.library.lng);
       bounds.extend(position);
+      const markerFill = result.availabilityChecked ? "#17354d" : "#8f5b00";
 
       const marker = new naver.maps.Marker({
         map,
         position,
         title: result.library.name,
         icon: {
-          content: `<div style="display:grid;place-items:center;width:${isSelected ? 40 : index === 0 ? 34 : 28}px;height:${isSelected ? 40 : index === 0 ? 34 : 28}px;border-radius:999px;background:${result.loanAvailable ? "#1f8f61" : "#6b7280"};color:#fff;font-weight:800;font-size:${isSelected ? 15 : index === 0 ? 14 : 12}px;border:${isSelected ? 4 : 3}px solid ${isSelected ? "rgba(255,106,61,0.95)" : "rgba(255,255,255,0.95)"};box-shadow:0 12px 26px rgba(23,53,77,0.25);">${index + 1}</div>`,
+          content: `<div style="display:grid;place-items:center;width:${isSelected ? 40 : index === 0 ? 34 : 28}px;height:${isSelected ? 40 : index === 0 ? 34 : 28}px;border-radius:999px;background:${markerFill};color:#fff;font-weight:800;font-size:${isSelected ? 15 : index === 0 ? 14 : 12}px;border:${isSelected ? 4 : 3}px solid ${isSelected ? "rgba(255,106,61,0.95)" : "rgba(255,255,255,0.95)"};box-shadow:0 12px 26px rgba(23,53,77,0.25);">${index + 1}</div>`,
           anchor: new naver.maps.Point(isSelected ? 20 : index === 0 ? 17 : 14, isSelected ? 20 : index === 0 ? 17 : 14),
         },
         zIndex: isSelected ? 300 : 100 + index,
