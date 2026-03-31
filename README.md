@@ -10,15 +10,11 @@
   - 현재 위치 권한 요청
   - 주소/건물명/상호명 자동완성
   - NAVER 지도에 결과 표시
-- 도서관 상세 화면
-  - 기본 운영 정보
-  - 샘플 소장 도서 목록
 - API
   - `GET /api/search`
   - `GET /api/location-suggestions`
   - `GET /api/location-reverse`
   - 도서관 정보나루 실연동
-  - 인증키 미설정 시 샘플 데이터 fallback
   - NAVER Geocoding / Reverse Geocoding / Directions 5 연동
   - 선택형 POI 검색 연동 구조 (`NAVER Local Search`, `Kakao Local`)
 
@@ -57,22 +53,21 @@ npm run build
 - `app/page.tsx`: 홈 화면
 - `components/BookmapWorkspace.tsx`: 단일 검색 워크스페이스
 - `components/LibraryMapClient.tsx`: NAVER 지도 렌더링
-- `app/libraries/[id]/page.tsx`: 도서관 상세
 - `app/api/search/route.ts`: 검색 API
 - `app/api/location-suggestions/route.ts`: 위치 자동완성 API
 - `app/api/location-reverse/route.ts`: 현재 위치 역지오코딩 API
-- `lib/search.ts`: 라이브/샘플 검색 라우팅
+- `lib/search.ts`: 실데이터 검색 라우팅
 - `lib/data4library.ts`: 도서관 정보나루 실데이터 연동
 - `lib/naver-maps.ts`: NAVER Geocoding / Directions 5 연동
 - `lib/place-search.ts`: NAVER Local Search / Kakao Local 선택 연동
 - `lib/juso.ts`: 공공 도로명주소 검색 연동
 - `lib/location.ts`: 위치 해석
 - `lib/region.ts`: 지역 코드 해석
-- `lib/mock-data.ts`: 샘플 서지/도서관/소장 데이터
 
 ## 구현 메모
 
 - 지도는 NAVER Maps JavaScript API v3를 사용합니다.
 - 정보나루 Open API는 인증키가 필요합니다.
 - 실데이터 검색은 `srchBooks -> libSrchByBook -> bookExist` 순서로 호출합니다.
+- 위치를 먼저 선택해야 도서 검색과 지도 경로 계산이 시작됩니다.
 - ETA와 추천 경로는 NAVER Directions 5 기준으로 계산합니다.

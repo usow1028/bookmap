@@ -84,6 +84,252 @@ function readBoolean(value: unknown) {
   return normalized === "y" || normalized === "true" || normalized === "1";
 }
 
+function normalizeSearchText(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .normalize("NFKC")
+    .replace(/[()[\]{}'"`.,:;!?/\\|_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function compactSearchText(value: string) {
+  return normalizeSearchText(value).replace(/\s+/g, "");
+}
+
+function tokenizeSearchText(value: string) {
+  return normalizeSearchText(value)
+    .split(" ")
+    .map((token) => token.trim())
+    .filter((token) => token.length > 0);
+}
+
+function countMatchedTokens(source: string, tokens: string[]) {
+  if (tokens.length === 0) {
+    return 0;
+  }
+
+  return tokens.filter((token) => source.includes(token)).length;
+}
+
+function decodeHtmlEntities(value: string) {
+  return value
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
+
+function stripHtml(value: string) {
+  return decodeHtmlEntities(value)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function extractFirstMatch(source: string, pattern: RegExp) {
+  const matched = pattern.exec(source);
+  return matched?.[1] ? stripHtml(matched[1]) : "";
+}
+
+function computeBookCandidateSearchScore(book: BookCandidate, query: string) {
+  const normalizedQuery = normalizeSearchText(query);
+  const compactQuery = compactSearchText(query);
+  const queryTokens = tokenizeSearchText(query);
+
+  if (!normalizedQuery) {
+    return 0;
+  }
+
+  if (/^\d{13}$/.test(compactQuery) && book.isbn13 === compactQuery) {
+    return 5000;
+  }
+
+  const compactTitle = compactSearchText(book.title);
+  const compactAuthor = compactSearchText(book.author);
+  const compactPublisher = compactSearchText(book.publisher);
+  const compactTags = book.tags.map((tag) => compactSearchText(tag)).join(" ");
+  const matchedTitleTokens = countMatchedTokens(compactTitle, queryTokens);
+  const matchedAuthorTokens = countMatchedTokens(compactAuthor, queryTokens);
+  const matchedPublisherTokens = countMatchedTokens(compactPublisher, queryTokens);
+  const matchedTagTokens = countMatchedTokens(compactTags, queryTokens);
+  let score = 0;
+
+  if (compactTitle === compactQuery) {
+    score = Math.max(score, 4000);
+  }
+
+  if (compactTitle.startsWith(compactQuery) && compactQuery.length >= 2) {
+    score = Math.max(score, 3600);
+  }
+
+  if (compactTitle.includes(compactQuery) && compactQuery.length >= 2) {
+    score = Math.max(score, 3200);
+  }
+
+  if (queryTokens.length > 1 && matchedTitleTokens === queryTokens.length) {
+    score = Math.max(score, 2800 + queryTokens.length * 40);
+  } else if (matchedTitleTokens > 0) {
+    score = Math.max(score, matchedTitleTokens * 250);
+  }
+
+  if (matchedAuthorTokens === queryTokens.length && queryTokens.length > 0) {
+    score = Math.max(score, 1700);
+  } else if (matchedAuthorTokens > 0) {
+    score = Math.max(score, matchedAuthorTokens * 180);
+  }
+
+  if (matchedPublisherTokens === queryTokens.length && queryTokens.length > 0) {
+    score = Math.max(score, 1100);
+  } else if (matchedPublisherTokens > 0) {
+    score = Math.max(score, matchedPublisherTokens * 120);
+  }
+
+  if (matchedTagTokens === queryTokens.length && queryTokens.length > 0) {
+    score = Math.max(score, 900);
+  } else if (matchedTagTokens > 0) {
+    score = Math.max(score, matchedTagTokens * 80);
+  }
+
+  return score;
+}
+
+function compareBookCandidates(
+  left: { book: BookCandidate; score: number },
+  right: { book: BookCandidate; score: number },
+) {
+  if (left.score !== right.score) {
+    return right.score - left.score;
+  }
+
+  return left.book.title.localeCompare(right.book.title, "ko");
+}
+
+function rankBookCandidates(candidates: BookCandidate[], query: string, limit: number) {
+  const filtered = candidates
+    .map((book) => ({
+      book,
+      score: computeBookCandidateSearchScore(book, query),
+    }))
+    .filter((entry) => entry.score >= 700)
+    .sort(compareBookCandidates)
+    .slice(0, limit);
+
+  return filtered.map((entry) => entry.book);
+}
+
+function buildSearchQueryVariants(query: string) {
+  const trimmed = query.trim();
+
+  if (!trimmed) {
+    return [];
+  }
+
+  const collapsed = trimmed.replace(/\s+/g, " ");
+  const compact = collapsed.replace(/\s+/g, "");
+  const sanitized = collapsed
+    .replace(/[()[\]{}'"`.,:;!?/\\|_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return Array.from(new Set([collapsed, compact, sanitized].filter(Boolean)));
+}
+
+async function fetchApiBookCandidates(query: string, pageSize: number) {
+  const body = await fetchXml("srchBooks", {
+    isbn13: /^\d{13}$/.test(query) ? query : undefined,
+    keyword: /^\d{13}$/.test(query) ? undefined : query,
+    pageNo: 1,
+    pageSize,
+    exactMatch: "false",
+  });
+
+  const docs = asArray(
+    (body.docs as { doc?: Record<string, unknown> | Array<Record<string, unknown>> } | undefined)?.doc,
+  );
+
+  return docs
+    .map((doc) => mapDocToBookCandidate(doc))
+    .filter((candidate): candidate is BookCandidate => Boolean(candidate));
+}
+
+async function fetchSiteSearchBookCandidates(query: string, limit: number) {
+  const url = new URL("https://www.data4library.kr/srch");
+  url.searchParams.set("srchText", query);
+
+  const response = await fetch(url, {
+    headers: {
+      accept: "text/html,application/xhtml+xml",
+    },
+    next: {
+      revalidate: 3600,
+    },
+  });
+
+  if (!response.ok) {
+    return [];
+  }
+
+  const html = await response.text();
+  const blocks = html.match(/<div class="list_col">[\s\S]*?<div class="l_c_number">/g) ?? [];
+
+  return blocks
+    .map((block) => {
+      const isbn13 = extractFirstMatch(block, /<span class="l_c_issn">[\s\S]*?ISBN<\/em>\s*([^<]+)<\/span>/);
+      const title = extractFirstMatch(block, /class="l_c_tit">([\s\S]*?)<\/a>/);
+      const author = extractFirstMatch(block, /<li><span>지은이<\/span>\s*([\s\S]*?)<\/li>/);
+      const publisher = extractFirstMatch(block, /<li><span>출판사<\/span>\s*([\s\S]*?)<\/li>/);
+      const detailSeq = extractFirstMatch(block, /onclick="detailBookV\('(\d+)'\)"/);
+
+      if (!isbn13 || !title) {
+        return null;
+      }
+
+      const candidate: BookCandidate = {
+        isbn13,
+        title,
+        author,
+        publisher,
+        synopsis: "",
+        tags: [],
+        detailUrl: detailSeq ? `https://www.data4library.kr/bookV?seq=${detailSeq}` : undefined,
+      };
+
+      return candidate;
+    })
+    .filter((candidate): candidate is BookCandidate => candidate !== null)
+    .slice(0, limit);
+}
+
+function mergeBookCandidates(...groups: BookCandidate[][]) {
+  const merged = new Map<string, BookCandidate>();
+
+  for (const group of groups) {
+    for (const candidate of group) {
+      const existing = merged.get(candidate.isbn13);
+
+      if (!existing) {
+        merged.set(candidate.isbn13, candidate);
+        continue;
+      }
+
+      merged.set(candidate.isbn13, {
+        ...existing,
+        ...candidate,
+        synopsis: existing.synopsis || candidate.synopsis,
+        tags: existing.tags.length > 0 ? existing.tags : candidate.tags,
+        coverUrl: existing.coverUrl ?? candidate.coverUrl,
+        detailUrl: existing.detailUrl ?? candidate.detailUrl,
+      });
+    }
+  }
+
+  return Array.from(merged.values());
+}
+
 function computeScore(params: {
   distanceKm: number;
   etaMinutes: number;
@@ -101,6 +347,10 @@ function computeScore(params: {
 function compareSearchResults(left: SearchResult, right: SearchResult) {
   if (left.loanAvailable !== right.loanAvailable) {
     return left.loanAvailable ? -1 : 1;
+  }
+
+  if (left.availabilityChecked !== right.availabilityChecked) {
+    return left.availabilityChecked ? -1 : 1;
   }
 
   if (left.hasBook !== right.hasBook) {
@@ -216,21 +466,34 @@ async function searchBookCandidates(query: string, limit = 8) {
     return [];
   }
 
-  const body = await fetchXml("srchBooks", {
-    isbn13: /^\d{13}$/.test(trimmed) ? trimmed : undefined,
-    keyword: /^\d{13}$/.test(trimmed) ? undefined : trimmed,
-    pageNo: 1,
-    pageSize: limit,
-    exactMatch: "false",
-  });
+  if (/^\d{13}$/.test(trimmed)) {
+    return fetchApiBookCandidates(trimmed, 1);
+  }
 
-  const docs = asArray(
-    (body.docs as { doc?: Record<string, unknown> | Array<Record<string, unknown>> } | undefined)?.doc,
+  const apiCandidates = mergeBookCandidates(
+    ...(
+      await Promise.all(
+        buildSearchQueryVariants(trimmed).map((variant) => fetchApiBookCandidates(variant, 30).catch(() => [])),
+      )
+    ),
+  );
+  const rankedApiCandidates = rankBookCandidates(apiCandidates, trimmed, limit);
+  const siteFallbackNeeded =
+    rankedApiCandidates.length === 0 || (tokenizeSearchText(trimmed).length > 1 && rankedApiCandidates.length < limit);
+
+  if (!siteFallbackNeeded) {
+    return rankedApiCandidates;
+  }
+
+  const siteCandidates = await fetchSiteSearchBookCandidates(trimmed, limit * 2).catch(
+    (): BookCandidate[] => [],
   );
 
-  return docs
-    .map((doc) => mapDocToBookCandidate(doc))
-    .filter((candidate): candidate is BookCandidate => Boolean(candidate));
+  return rankBookCandidates(
+    mergeBookCandidates(siteCandidates, apiCandidates),
+    trimmed,
+    limit,
+  );
 }
 
 async function fetchBookCandidateByIsbn(isbn13: string) {
@@ -284,7 +547,7 @@ async function fetchLibrariesByBook(isbn13: string, regionCode: string) {
         lat,
         lng,
         homepage: readText(lib.homepage),
-        openHours: "운영 정보는 홈페이지 확인",
+        openHours: "",
         district: deriveDistrict(address),
       } satisfies LibraryRecord;
     })
@@ -338,6 +601,7 @@ async function buildLiveResults(resolvedBook: BookCandidate, userLocation: UserL
             travelTimes: buildTravelTimes(distanceKm, etaMinutes),
             hasBook: availability.hasBook,
             loanAvailable: availability.loanAvailable,
+            availabilityChecked: true,
             checkedAt,
             score: computeScore({
               distanceKm,
@@ -356,6 +620,7 @@ async function buildLiveResults(resolvedBook: BookCandidate, userLocation: UserL
             travelTimes: buildTravelTimes(distanceKm, etaMinutes),
             hasBook: true,
             loanAvailable: false,
+            availabilityChecked: false,
             checkedAt,
             score: computeScore({
               distanceKm,

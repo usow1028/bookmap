@@ -1,5 +1,4 @@
 import { JusoAddressRecord, hasJusoApiKey, searchJusoAddresses } from "@/lib/juso";
-import { defaultLocation, sampleLocations } from "@/lib/mock-data";
 import {
   geocodeSuggestionsWithNaver,
   geocodeWithNaver,
@@ -9,6 +8,17 @@ import {
 import { searchPlacesWithKakaoLocal, searchPlacesWithNaverLocal } from "@/lib/place-search";
 import { LocationSuggestion, MapPoint, UserLocation } from "@/lib/types";
 import { getDistanceKm } from "@/lib/geo";
+
+type LocationResolutionErrorCode = "location_required" | "location_not_found";
+
+export class LocationResolutionError extends Error {
+  code: LocationResolutionErrorCode;
+
+  constructor(code: LocationResolutionErrorCode, message: string) {
+    super(message);
+    this.code = code;
+  }
+}
 
 function normalize(value: string) {
   return value
@@ -38,15 +48,6 @@ function buildQueryVariants(query: string) {
     .filter(Boolean);
 
   return Array.from(new Set(variants)).slice(0, 3);
-}
-
-function findPresetLocation(label: string) {
-  const normalized = normalize(label);
-
-  return sampleLocations.find((location) => {
-    const candidate = normalize(location.label);
-    return candidate.includes(normalized) || normalized.includes(candidate);
-  });
 }
 
 function scoreSuggestion(
@@ -82,7 +83,6 @@ function scoreSuggestion(
   }
 
   const sourceWeight: Record<NonNullable<LocationSuggestion["source"]>, number> = {
-    preset: 12,
     juso: 42,
     "naver-geocode": 34,
     "naver-local": 36,
@@ -324,21 +324,7 @@ async function searchNominatimSuggestions(query: string, limit: number) {
 
 async function collectLocationSuggestions(query: string, limit: number, origin?: MapPoint) {
   const variants = buildQueryVariants(query);
-  const presetSuggestions = sampleLocations
-    .filter((location) => {
-      const candidate = normalize(location.label);
-      const search = normalize(query);
-      return candidate.includes(search) || search.includes(candidate);
-    })
-    .map((location) => ({
-      label: location.label,
-      lat: location.lat,
-      lng: location.lng,
-      kind: "preset" as const,
-      source: "preset" as const,
-    }));
-
-  const tasks: Array<Promise<LocationSuggestion[]>> = [Promise.resolve(presetSuggestions)];
+  const tasks: Array<Promise<LocationSuggestion[]>> = [];
 
   for (const variant of variants) {
     if (hasJusoApiKey() && hasNaverMapsCredentials()) {
@@ -367,9 +353,9 @@ async function collectLocationSuggestions(query: string, limit: number, origin?:
 
   try {
     const fallback = await searchNominatimSuggestions(query, limit);
-    return dedupeSuggestions([...presetSuggestions, ...fallback], query, limit, origin);
+    return dedupeSuggestions(fallback, query, limit, origin);
   } catch {
-    return dedupeSuggestions(presetSuggestions, query, limit, origin);
+    return [];
   }
 }
 
@@ -504,17 +490,11 @@ export async function resolveUserLocation(
   }
 
   if (!label) {
-    return defaultLocation;
-  }
-
-  const preset = findPresetLocation(label);
-
-  if (preset) {
-    return preset;
+    throw new LocationResolutionError("location_required", "출발 위치를 먼저 선택해 주세요.");
   }
 
   try {
-    const [bestCandidate] = await suggestLocations(label, 1, defaultLocation);
+    const [bestCandidate] = await suggestLocations(label, 1);
 
     if (bestCandidate) {
       return {
@@ -523,12 +503,14 @@ export async function resolveUserLocation(
         lng: bestCandidate.lng,
       };
     }
-  } catch {
-    // Ignore combined location search failures and fall back to the default center.
+  } catch (error) {
+    if (error instanceof LocationResolutionError) {
+      throw error;
+    }
   }
 
-  return {
-    ...defaultLocation,
-    label,
-  };
+  throw new LocationResolutionError(
+    "location_not_found",
+    "입력한 위치를 찾지 못했습니다. 자동완성 목록에서 다시 선택해 주세요.",
+  );
 }

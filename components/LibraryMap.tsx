@@ -9,7 +9,7 @@ const LibraryMapClient = dynamic(() => import("@/components/LibraryMapClient"), 
 });
 
 type LibraryMapProps = {
-  userLocation: UserLocation;
+  userLocation?: UserLocation | null;
   results: SearchResult[];
   selectedLibraryId?: string | null;
   onSelectLibrary?: (libraryId: string) => void;
@@ -21,6 +21,10 @@ export function LibraryMap({
   selectedLibraryId,
   onSelectLibrary,
 }: LibraryMapProps) {
+  if (!userLocation) {
+    return <div className="map-shell map-loading">출발 위치를 선택하면 지도와 경로가 표시됩니다.</div>;
+  }
+
   return (
     <LibraryMapClient
       userLocation={userLocation}

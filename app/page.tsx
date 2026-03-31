@@ -29,16 +29,29 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const params = await searchParams;
   const initialQuery = readString(params.q);
   const initialIsbn = readString(params.isbn);
-  const initialLocationLabel = readString(params.location, "서울 성수동");
+  const initialLocationLabel = readString(params.location);
   const initialLat = readNumber(params.lat);
   const initialLng = readNumber(params.lng);
-  const initialResponse = initialQuery
-    ? await searchBookmap(initialQuery, {
-        label: initialLocationLabel,
-        lat: initialLat,
-        lng: initialLng,
-      }, initialIsbn || undefined)
-    : null;
+  const hasInitialLocation =
+    Boolean(initialLocationLabel.trim()) ||
+    (typeof initialLat === "number" && typeof initialLng === "number");
+  let initialResponse = null;
+
+  if (initialQuery && hasInitialLocation) {
+    try {
+      initialResponse = await searchBookmap(
+        initialQuery,
+        {
+          label: initialLocationLabel,
+          lat: initialLat,
+          lng: initialLng,
+        },
+        initialIsbn || undefined,
+      );
+    } catch {
+      initialResponse = null;
+    }
+  }
 
   return (
     <main className="page-shell single-workspace-page">

@@ -1,10 +1,12 @@
 "use client";
 
 import { formatEta } from "@/lib/format";
+import { buildLibraryHomepageSearchLaunchUrl } from "@/lib/library-homepage-search";
 import { openNaverMapRoute } from "@/lib/naver-map-app";
-import { SearchResult, UserLocation } from "@/lib/types";
+import { BookCandidate, SearchResult, UserLocation } from "@/lib/types";
 
 type LibraryCandidateCardProps = {
+  book: BookCandidate | null;
   result: SearchResult;
   userLocation: UserLocation;
   isSelected: boolean;
@@ -12,12 +14,22 @@ type LibraryCandidateCardProps = {
 };
 
 export function LibraryCandidateCard({
+  book,
   result,
   userLocation,
   isSelected,
   onSelect,
 }: LibraryCandidateCardProps) {
-  const availabilityLabel = result.loanAvailable ? "대출 가능" : "대출 불가";
+  const availabilityLabel = !result.availabilityChecked
+    ? "확인 필요"
+    : result.loanAvailable
+      ? "대출 가능"
+      : "대출 불가";
+  const availabilityClassName = !result.availabilityChecked
+    ? "is-unknown"
+    : result.loanAvailable
+      ? "is-available"
+      : "is-unavailable";
   const handleActivate = () => onSelect(result.library.id);
   const openRoute = () =>
     openNaverMapRoute({
@@ -28,6 +40,9 @@ export function LibraryCandidateCard({
         lng: result.library.lng,
       },
     });
+  const homepageSearchUrl = result.library.homepage
+    ? buildLibraryHomepageSearchLaunchUrl(result.library.homepage, book)
+    : "";
 
   return (
     <article
@@ -47,7 +62,7 @@ export function LibraryCandidateCard({
         <div className="library-candidate-name-row">
           <strong className="library-candidate-name">{result.library.name}</strong>
         </div>
-        <span className={`library-availability-pill ${result.loanAvailable ? "is-available" : "is-unavailable"}`}>
+        <span className={`library-availability-pill ${availabilityClassName}`}>
           {availabilityLabel}
         </span>
       </div>
@@ -61,15 +76,19 @@ export function LibraryCandidateCard({
       </div>
 
       <div className="library-candidate-actions">
-        <a
-          className="candidate-link-button"
-          href={result.library.homepage}
-          target="_blank"
-          rel="noreferrer"
-          onClick={(event) => event.stopPropagation()}
-        >
-          홈페이지
-        </a>
+        {homepageSearchUrl ? (
+          <a
+            className="candidate-link-button"
+            href={homepageSearchUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            홈페이지 검색
+          </a>
+        ) : null}
         <button
           className="candidate-route-button"
           type="button"

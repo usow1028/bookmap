@@ -10,9 +10,8 @@ export type LocationSuggestion = {
   detail?: string;
   lat: number;
   lng: number;
-  kind?: "preset" | "address" | "place";
+  kind?: "address" | "place";
   source?:
-    | "preset"
     | "juso"
     | "naver-geocode"
     | "naver-local"
@@ -34,13 +33,6 @@ export type BookCandidate = {
   tags: string[];
   coverUrl?: string;
   detailUrl?: string;
-};
-
-export type LibraryHolding = {
-  libraryId: string;
-  hasBook: boolean;
-  loanAvailable: boolean;
-  checkedAt: string;
 };
 
 export type LibraryRecord = {
@@ -65,6 +57,7 @@ export type SearchResult = {
   };
   hasBook: boolean;
   loanAvailable: boolean;
+  availabilityChecked: boolean;
   checkedAt: string;
   score: number;
   routePath?: MapPoint[];
@@ -77,5 +70,5 @@ export type SearchResponse = {
   location: UserLocation;
   results: SearchResult[];
   warnings: string[];
-  source: "live" | "mock";
+  source: "live";
 };

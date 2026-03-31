@@ -459,6 +459,11 @@ input {
   color: #4b5563;
 }
 
+.library-availability-pill.is-unknown {
+  background: rgba(218, 119, 6, 0.14);
+  color: #8f5b00;
+}
+
 .library-candidate-name {
   font-size: 0.98rem;
   line-height: 1.25;
@@ -511,9 +516,11 @@ input {
 }
 
 .candidate-link-button {
+  appearance: none;
   border: 1px solid rgba(23, 53, 77, 0.12);
   background: rgba(23, 53, 77, 0.06);
   color: var(--navy);
+  cursor: pointer;
 }
 
 .candidate-route-button {
@@ -889,11 +896,6 @@ h2 {
 .location-suggestion-kind.is-place {
   background: rgba(255, 106, 61, 0.14);
   color: var(--accent-deep);
-}
-
-.location-suggestion-kind.is-preset {
-  background: rgba(31, 143, 97, 0.13);
-  color: var(--mint);
 }
 
 .location-suggestion-button.is-active,

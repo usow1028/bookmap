@@ -1,7 +1,6 @@
 "use client";
 
 import { KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from "react";
-import { defaultLocation } from "@/lib/mock-data";
 import { BookCandidate, LocationSuggestion, SearchResponse } from "@/lib/types";
 import { BookCoverImage } from "@/components/BookCoverImage";
 import { LibraryCandidateCard } from "@/components/LibraryCandidateCard";
@@ -26,23 +25,11 @@ type BookmapWorkspaceProps = {
 };
 
 function getSourceLabel(source: SearchResponse["source"] | null) {
-  if (!source) {
-    return "지도";
-  }
-
-  return source === "live" ? "실데이터" : "샘플";
+  return source ? "실데이터" : "지도";
 }
 
 function getLocationSuggestionBadge(suggestion: LocationSuggestion) {
-  if (suggestion.kind === "place") {
-    return "장소";
-  }
-
-  if (suggestion.kind === "preset") {
-    return "저장 위치";
-  }
-
-  return "주소";
+  return suggestion.kind === "place" ? "장소" : "주소";
 }
 
 function canSearchBooks(query: string) {
@@ -109,7 +96,7 @@ async function requestSearchResponse(
 
 export function BookmapWorkspace({
   initialQuery = "",
-  initialLocationLabel = defaultLocation.label,
+  initialLocationLabel = "",
   initialLat,
   initialLng,
   initialResponse = null,
@@ -118,7 +105,7 @@ export function BookmapWorkspace({
     typeof initialLat !== "number" &&
     typeof initialLng !== "number" &&
     !initialResponse &&
-    initialLocationLabel.trim() === defaultLocation.label;
+    !initialLocationLabel.trim();
   const resolvedInitialCoordinates =
     typeof initialLat === "number" && typeof initialLng === "number"
       ? { lat: initialLat, lng: initialLng }
@@ -161,38 +148,39 @@ export function BookmapWorkspace({
   const coordinateLat = committedCoordinates?.lat ?? null;
   const coordinateLng = committedCoordinates?.lng ?? null;
   const selectedResponseMatchesCommittedLocation =
-    selectedResponse &&
-    (coordinateLat !== null && coordinateLng !== null
-      ? selectedResponse.location.lat === coordinateLat &&
-        selectedResponse.location.lng === coordinateLng
-      : selectedResponse.location.label === (committedLocationLabel.trim() || defaultLocation.label));
+    Boolean(
+      selectedResponse &&
+        coordinateLat !== null &&
+        coordinateLng !== null &&
+        selectedResponse.location.lat === coordinateLat &&
+        selectedResponse.location.lng === coordinateLng,
+    );
   const isLocationCommitted =
     Boolean(committedCoordinates) &&
     !hasLocationInputChanged &&
     locationLabel.trim() === committedLocationLabel.trim();
 
   const visibleLocation = useMemo(
-    () => ({
-      label:
-        (selectedResponseMatchesCommittedLocation
-          ? selectedResponse?.location.label
-          : committedLocationLabel) || defaultLocation.label,
-      lat:
-        (selectedResponseMatchesCommittedLocation
-          ? selectedResponse?.location.lat
-          : coordinateLat) ?? defaultLocation.lat,
-      lng:
-        (selectedResponseMatchesCommittedLocation
-          ? selectedResponse?.location.lng
-          : coordinateLng) ?? defaultLocation.lng,
-    }),
+    () => {
+      if (selectedResponseMatchesCommittedLocation && selectedResponse) {
+        return selectedResponse.location;
+      }
+
+      if (coordinateLat === null || coordinateLng === null) {
+        return null;
+      }
+
+      return {
+        label: committedLocationLabel.trim() || "선택한 위치",
+        lat: coordinateLat,
+        lng: coordinateLng,
+      };
+    },
     [
       committedLocationLabel,
       coordinateLat,
       coordinateLng,
-      selectedResponse?.location.label,
-      selectedResponse?.location.lat,
-      selectedResponse?.location.lng,
+      selectedResponse,
       selectedResponseMatchesCommittedLocation,
     ],
   );
@@ -318,9 +306,7 @@ export function BookmapWorkspace({
       try {
         const apiResponse = await fetch(
           `/api/location-suggestions?query=${encodeURIComponent(trimmed)}${
-            Number.isFinite(visibleLocation.lat) && Number.isFinite(visibleLocation.lng)
-              ? `&lat=${visibleLocation.lat}&lng=${visibleLocation.lng}`
-              : ""
+            visibleLocation ? `&lat=${visibleLocation.lat}&lng=${visibleLocation.lng}` : ""
           }`,
           {
             signal: controller.signal,
@@ -358,7 +344,7 @@ export function BookmapWorkspace({
       controller.abort();
       window.clearTimeout(timeoutId);
     };
-  }, [hasLocationInputChanged, locationLabel, visibleLocation.lat, visibleLocation.lng]);
+  }, [hasLocationInputChanged, locationLabel, visibleLocation]);
 
   useEffect(() => {
     if (!isLocationCommitted) {
@@ -437,10 +423,10 @@ export function BookmapWorkspace({
 
     const responseMatchesLocation =
       selectedResponse?.resolvedBook?.isbn13 === activeBookIsbn &&
-      (coordinateLat !== null && coordinateLng !== null
-        ? selectedResponse.location.lat === coordinateLat &&
-          selectedResponse.location.lng === coordinateLng
-        : selectedResponse.location.label === (committedLocationLabel.trim() || defaultLocation.label));
+      coordinateLat !== null &&
+      coordinateLng !== null &&
+      selectedResponse.location.lat === coordinateLat &&
+      selectedResponse.location.lng === coordinateLng;
 
     if (responseMatchesLocation) {
       return;
@@ -655,6 +641,9 @@ export function BookmapWorkspace({
             ) : null}
           </div>
           {isLocationSuggestionLoading ? <div className="inline-loading">위치 찾는 중...</div> : null}
+          {!isLocationCommitted ? (
+            <p className="field-helper-text">자동완성 목록에서 위치를 선택하면 도서 검색이 시작됩니다.</p>
+          ) : null}
         </div>
 
         <div className="field-block">
@@ -758,13 +747,22 @@ export function BookmapWorkspace({
           </section>
         ) : null}
 
-        {libraryResults.length > 0 ? (
+        {selectedResponse?.warnings.length ? (
+          <div className="warning-strip">
+            {selectedResponse.warnings.map((warning) => (
+              <span key={warning}>{warning}</span>
+            ))}
+          </div>
+        ) : null}
+
+        {libraryResults.length > 0 && visibleLocation ? (
           <section className="selection-section library-candidate-section">
             <p className="selection-kicker">가까운 도서관</p>
             <div className="library-candidate-list">
               {libraryResults.map((result) => (
                 <LibraryCandidateCard
                   key={result.library.id}
+                  book={selectedBook}
                   result={result}
                   userLocation={visibleLocation}
                   isSelected={selectedLibraryId === result.library.id}

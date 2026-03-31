@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { defaultLocation } from "@/lib/mock-data";
+import { LocationResolutionError } from "@/lib/location";
 import { searchBookmap } from "@/lib/search";
-import { SearchResponse } from "@/lib/types";
 
 function readNumber(value: string | null) {
   if (!value) {
@@ -34,22 +33,26 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(response);
   } catch (error) {
+    if (error instanceof LocationResolutionError) {
+      return NextResponse.json(
+        {
+          error: error.message,
+        },
+        {
+          status: error.code === "location_required" ? 400 : 404,
+        },
+      );
+    }
+
     console.error("GET /api/search failed", error);
 
-    const fallback: SearchResponse = {
-      query,
-      books: [],
-      resolvedBook: null,
-      location: {
-        label: label.trim() || defaultLocation.label,
-        lat: lat ?? defaultLocation.lat,
-        lng: lng ?? defaultLocation.lng,
+    return NextResponse.json(
+      {
+        error: "검색 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.",
       },
-      results: [],
-      warnings: ["검색 중 오류가 발생해 결과를 불러오지 못했습니다. 다시 시도해 주세요."],
-      source: "mock",
-    };
-
-    return NextResponse.json(fallback);
+      {
+        status: 502,
+      },
+    );
   }
 }
