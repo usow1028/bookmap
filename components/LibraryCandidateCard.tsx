@@ -86,7 +86,7 @@ export function LibraryCandidateCard({
               event.stopPropagation();
             }}
           >
-            홈페이지 검색
+            예약하기
           </a>
         ) : null}
         <button
