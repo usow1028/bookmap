@@ -37,6 +37,16 @@ type PyxisSearchResponse = {
   } | null;
 };
 
+type PyxisIsxnBiblio = {
+  id?: number;
+};
+
+type PyxisIsxnResponse = {
+  data?: {
+    list?: PyxisIsxnBiblio[] | null;
+  } | null;
+};
+
 type PyxisBranchesResponse = {
   data?: {
     list?: PyxisBranch[] | null;
@@ -76,6 +86,18 @@ type PyxisItemsResponse = {
   } | null;
 };
 
+type PyxisBiblioDetailPrimaryEntry = {
+  titleStatement?: string;
+  isbn?: string | null;
+  content?: string | null;
+};
+
+type PyxisBiblioDetailResponse = {
+  data?: {
+    list?: PyxisBiblioDetailPrimaryEntry[] | null;
+  } | null;
+};
+
 type MatchedPyxisBranch = {
   biblioId: number;
   branchId: number;
@@ -84,7 +106,15 @@ type MatchedPyxisBranch = {
   searchStateCode: string;
 };
 
+type PyxisExactBiblioIndex = {
+  hasRecords: boolean;
+  allBiblioIds: number[];
+  byLibraryCode: Map<string, number[]>;
+};
+
 const pyxisConfigCache = new Map<string, Promise<PyxisConfig | null>>();
+const pyxisBranchesCache = new Map<string, Promise<PyxisBranch[]>>();
+const pyxisExactBiblioIndexCache = new Map<string, Promise<PyxisExactBiblioIndex>>();
 
 function normalizeHomepageUrl(homepage: string) {
   const trimmed = homepage.trim();
@@ -281,8 +311,18 @@ function buildPyxisSearchUrl(config: PyxisConfig, searchTerm: string) {
   return url;
 }
 
+function buildPyxisIsxnUrl(config: PyxisConfig, isbn13: string) {
+  const url = new URL(`${config.homePageId}/biblio-by-isxn`, config.apiUrl);
+  url.searchParams.set("isbn", isbn13);
+  return url;
+}
+
 function buildPyxisBranchesUrl(config: PyxisConfig) {
   return new URL(`${config.homePageId}/branches`, config.apiUrl);
+}
+
+function buildPyxisBiblioDetailUrl(config: PyxisConfig, biblioId: number) {
+  return new URL(`${config.homePageId}/biblios/${biblioId}`, config.apiUrl);
 }
 
 function buildPyxisItemsUrl(config: PyxisConfig, biblioId: number, branchId: number) {
@@ -356,9 +396,19 @@ async function fetchPyxisSearchBiblios(config: PyxisConfig, searchTerm: string) 
   return payload.data?.list ?? [];
 }
 
+async function fetchPyxisIsxnBiblios(config: PyxisConfig, isbn13: string) {
+  const payload = await fetchJson<PyxisIsxnResponse>(buildPyxisIsxnUrl(config, isbn13));
+  return payload.data?.list ?? [];
+}
+
 async function fetchPyxisBranches(config: PyxisConfig) {
   const payload = await fetchJson<PyxisBranchesResponse>(buildPyxisBranchesUrl(config));
   return payload.data?.list ?? [];
+}
+
+async function fetchPyxisBiblioDetail(config: PyxisConfig, biblioId: number) {
+  const payload = await fetchJson<PyxisBiblioDetailResponse>(buildPyxisBiblioDetailUrl(config, biblioId));
+  return payload.data?.list?.[0] ?? null;
 }
 
 async function fetchPyxisItems(config: PyxisConfig, match: MatchedPyxisBranch) {
@@ -368,7 +418,161 @@ async function fetchPyxisItems(config: PyxisConfig, match: MatchedPyxisBranch) {
   return payload.data?.list ?? [];
 }
 
-function summarizePyxisCatalogMiss(library: LibraryRecord): HomepageAvailability {
+function parsePyxisMarcLibraryCode(content: string | null | undefined) {
+  if (!content) {
+    return "";
+  }
+
+  try {
+    const parsed = JSON.parse(content) as { fields?: unknown[] };
+    const fields = Array.isArray(parsed.fields) ? parsed.fields : [];
+
+    for (const field of fields) {
+      if (!Array.isArray(field) || field[0] !== "040" || !Array.isArray(field[3])) {
+        continue;
+      }
+
+      for (const subfield of field[3]) {
+        if (!Array.isArray(subfield)) {
+          continue;
+        }
+
+        const [code, value] = subfield;
+
+        if ((code === "a" || code === "c") && typeof value === "string" && value.trim()) {
+          return value.trim();
+        }
+      }
+    }
+  } catch {
+    const matched = content.match(/\["040","[^"]*","[^"]*",\[\["[ac]","(\d{6})"/);
+    return matched?.[1] ?? "";
+  }
+
+  return "";
+}
+
+function buildPyxisCacheKey(config: PyxisConfig) {
+  return `${config.apiUrl}|${config.homePageId}|${config.collectionId}`;
+}
+
+async function resolvePyxisBranches(config: PyxisConfig) {
+  const cacheKey = `${buildPyxisCacheKey(config)}|branches`;
+  const cached = pyxisBranchesCache.get(cacheKey);
+
+  if (cached) {
+    try {
+      return await cached;
+    } catch {
+      pyxisBranchesCache.delete(cacheKey);
+      return [];
+    }
+  }
+
+  const branchesPromise = fetchPyxisBranches(config);
+  pyxisBranchesCache.set(cacheKey, branchesPromise);
+
+  try {
+    return await branchesPromise;
+  } catch {
+    pyxisBranchesCache.delete(cacheKey);
+    return [];
+  }
+}
+
+async function resolvePyxisExactBiblioIndex(config: PyxisConfig, isbn13: string) {
+  const cacheKey = `${buildPyxisCacheKey(config)}|isbn:${isbn13}`;
+  const cached = pyxisExactBiblioIndexCache.get(cacheKey);
+
+  if (cached) {
+    try {
+      return await cached;
+    } catch {
+      pyxisExactBiblioIndexCache.delete(cacheKey);
+      throw new Error("Failed to resolve cached Pyxis ISBN index");
+    }
+  }
+
+  const indexPromise = (async () => {
+    const biblios = await fetchPyxisIsxnBiblios(config, isbn13);
+    const exactBiblioIds = biblios.map((biblio) => biblio.id).filter((id): id is number => Boolean(id));
+    const byLibraryCode = new Map<string, number[]>();
+
+    await Promise.allSettled(
+      exactBiblioIds.map(async (biblioId) => {
+        const detail = await fetchPyxisBiblioDetail(config, biblioId);
+        const libraryCode = parsePyxisMarcLibraryCode(detail?.content);
+
+        if (!libraryCode) {
+          return;
+        }
+
+        const ids = byLibraryCode.get(libraryCode) ?? [];
+        ids.push(biblioId);
+        byLibraryCode.set(libraryCode, ids);
+      }),
+    );
+
+    return {
+      hasRecords: exactBiblioIds.length > 0,
+      allBiblioIds: exactBiblioIds,
+      byLibraryCode,
+    } satisfies PyxisExactBiblioIndex;
+  })();
+
+  pyxisExactBiblioIndexCache.set(cacheKey, indexPromise);
+
+  try {
+    return await indexPromise;
+  } catch {
+    pyxisExactBiblioIndexCache.delete(cacheKey);
+    throw new Error("Failed to build Pyxis ISBN index");
+  }
+}
+
+function collectMatchingPyxisBranches(library: LibraryRecord, branches: PyxisBranch[]) {
+  return branches.filter(
+    (branch): branch is PyxisBranch & { id: number; name: string } =>
+      Boolean(branch.id)
+      && Boolean(branch.name?.trim())
+      && isMatchingLibraryName(library.name, branch.name?.trim() ?? ""),
+  );
+}
+
+async function fetchPyxisItemsForBranches(
+  config: PyxisConfig,
+  biblioIds: number[],
+  branches: Array<PyxisBranch & { id: number; name: string }>,
+) {
+  const matchedItems: PyxisBiblioItem[] = [];
+
+  for (const biblioId of biblioIds) {
+    for (const branch of branches) {
+      const items = await fetchPyxisItems(config, {
+        biblioId,
+        branchId: branch.id,
+        branchName: branch.name,
+        searchState: "",
+        searchStateCode: "",
+      }).catch(() => []);
+
+      if (items.length > 0) {
+        matchedItems.push(...items);
+      }
+    }
+
+    if (matchedItems.length > 0) {
+      break;
+    }
+  }
+
+  return matchedItems;
+}
+
+function summarizePyxisCatalogMiss(
+  library: LibraryRecord,
+  reason = `${library.name} 분관 레코드를 홈페이지 검색에서 찾지 못했습니다.`,
+): HomepageAvailability {
   return {
     hasBook: true,
     loanAvailable: false,
@@ -376,7 +580,7 @@ function summarizePyxisCatalogMiss(library: LibraryRecord): HomepageAvailability
     availabilityChecked: false,
     availabilityStatus: "unknown",
     availabilitySource: "homepage",
-    availabilityDetail: `${library.name} 분관 레코드를 홈페이지 검색에서 찾지 못했습니다.`,
+    availabilityDetail: reason,
     checkedAt: buildHomepageCheckedAtLabel(),
   };
 }
@@ -462,6 +666,36 @@ export async function resolveHomepageAvailability(
     return null;
   }
 
+  const branches = await resolvePyxisBranches(config).catch(() => []);
+  const matchingBranches = collectMatchingPyxisBranches(library, branches);
+  const exactBiblioIndex = await resolvePyxisExactBiblioIndex(config, book.isbn13.trim()).catch(() => null);
+
+  if (matchingBranches.length > 0 && exactBiblioIndex?.hasRecords) {
+    const exactBiblioIds = exactBiblioIndex.byLibraryCode.get(library.id) ?? [];
+    const exactItems = await fetchPyxisItemsForBranches(config, exactBiblioIds, matchingBranches);
+
+    if (exactItems.length > 0) {
+      return summarizePyxisItems(exactItems);
+    }
+
+    if (exactBiblioIds.length === 0) {
+      const branchScopedExactItems = await fetchPyxisItemsForBranches(
+        config,
+        exactBiblioIndex.allBiblioIds,
+        matchingBranches,
+      );
+
+      if (branchScopedExactItems.length > 0) {
+        return summarizePyxisItems(branchScopedExactItems);
+      }
+
+      return summarizePyxisCatalogMiss(
+        library,
+        `${library.name} exact ISBN 레코드를 홈페이지에서 찾지 못했습니다.`,
+      );
+    }
+  }
+
   const searchTerms = Array.from(new Set([book.isbn13.trim(), book.title.trim()].filter(Boolean)));
   const searchBiblios = mergePyxisSearchBiblios(
     await Promise.all(searchTerms.map((searchTerm) => fetchPyxisSearchBiblios(config, searchTerm))),
@@ -469,7 +703,6 @@ export async function resolveHomepageAvailability(
   const matchedBranches = collectMatchedPyxisBranches(library, book.isbn13, searchBiblios);
 
   if (matchedBranches.length === 0) {
-    const branches = await fetchPyxisBranches(config).catch(() => []);
     return branches.some((branch) => isMatchingLibraryName(library.name, branch.name?.trim() ?? ""))
       ? summarizePyxisCatalogMiss(library)
       : null;
