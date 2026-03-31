@@ -46,6 +46,10 @@ export type LibraryRecord = {
   district: string;
 };
 
+export type AvailabilityStatus = "available" | "reservation-only" | "unavailable" | "unknown";
+
+export type AvailabilitySource = "data4library" | "homepage" | "unknown";
+
 export type SearchResult = {
   library: LibraryRecord;
   distanceKm: number;
@@ -57,7 +61,11 @@ export type SearchResult = {
   };
   hasBook: boolean;
   loanAvailable: boolean;
+  reservationAvailable: boolean;
   availabilityChecked: boolean;
+  availabilityStatus: AvailabilityStatus;
+  availabilitySource: AvailabilitySource;
+  availabilityDetail: string;
   checkedAt: string;
   score: number;
   routePath?: MapPoint[];

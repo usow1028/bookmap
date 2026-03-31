@@ -351,7 +351,13 @@ export default function LibraryMapClient({
       const isSelected = result.library.id === focusedResult?.library.id;
       const position = new naver.maps.LatLng(result.library.lat, result.library.lng);
       bounds.extend(position);
-      const markerFill = result.availabilityChecked ? "#17354d" : "#8f5b00";
+      const markerFill = !result.availabilityChecked
+        ? "#8f5b00"
+        : result.availabilityStatus === "available"
+          ? "#1f8f61"
+          : result.availabilityStatus === "reservation-only"
+            ? "#d97706"
+            : "#4b5563";
 
       const marker = new naver.maps.Marker({
         map,

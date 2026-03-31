@@ -7,6 +7,7 @@ import {
   estimateWalkingMinutes,
   getDistanceKm,
 } from "@/lib/geo";
+import { resolveHomepageAvailability } from "@/lib/library-homepage-availability";
 import { resolveRegionCode } from "@/lib/region";
 import { BookCandidate, LibraryRecord, SearchResponse, SearchResult, UserLocation } from "@/lib/types";
 
@@ -381,6 +382,60 @@ function getCheckedAtLabel() {
   }).format(previousDay);
 }
 
+function buildData4LibraryAvailabilitySnapshot(
+  availability: {
+    hasBook: boolean;
+    loanAvailable: boolean;
+  },
+  checkedAt: string,
+): Pick<
+  SearchResult,
+  | "hasBook"
+  | "loanAvailable"
+  | "reservationAvailable"
+  | "availabilityChecked"
+  | "availabilityStatus"
+  | "availabilitySource"
+  | "availabilityDetail"
+  | "checkedAt"
+> {
+  return {
+    hasBook: availability.hasBook,
+    loanAvailable: availability.loanAvailable,
+    reservationAvailable: false,
+    availabilityChecked: true,
+    availabilityStatus: availability.loanAvailable ? "available" : "unavailable",
+    availabilitySource: "data4library" as const,
+    availabilityDetail: "",
+    checkedAt,
+  };
+}
+
+function buildUnknownAvailabilitySnapshot(
+  checkedAt: string,
+): Pick<
+  SearchResult,
+  | "hasBook"
+  | "loanAvailable"
+  | "reservationAvailable"
+  | "availabilityChecked"
+  | "availabilityStatus"
+  | "availabilitySource"
+  | "availabilityDetail"
+  | "checkedAt"
+> {
+  return {
+    hasBook: true,
+    loanAvailable: false,
+    reservationAvailable: false,
+    availabilityChecked: false,
+    availabilityStatus: "unknown" as const,
+    availabilitySource: "unknown" as const,
+    availabilityDetail: "",
+    checkedAt,
+  };
+}
+
 function buildTravelTimes(distanceKm: number, carMinutes: number) {
   return {
     walk: estimateWalkingMinutes(distanceKm),
@@ -588,41 +643,56 @@ async function buildLiveResults(resolvedBook: BookCandidate, userLocation: UserL
         const etaMinutes = estimateDrivingMinutes(distanceKm);
 
         try {
-          const availability = await fetchAvailability(library.id, resolvedBook.isbn13);
+          const [data4LibraryAvailability, homepageAvailability] = await Promise.allSettled([
+            fetchAvailability(library.id, resolvedBook.isbn13),
+            resolveHomepageAvailability(library, resolvedBook),
+          ]);
+          const resolvedAvailability =
+            homepageAvailability.status === "fulfilled" && homepageAvailability.value
+              ? homepageAvailability.value
+              : data4LibraryAvailability.status === "fulfilled"
+                ? buildData4LibraryAvailabilitySnapshot(data4LibraryAvailability.value, checkedAt)
+                : null;
+
+          if (!resolvedAvailability) {
+            throw new Error("availability_unavailable");
+          }
 
           return {
             library,
             distanceKm,
             etaMinutes,
             travelTimes: buildTravelTimes(distanceKm, etaMinutes),
-            hasBook: availability.hasBook,
-            loanAvailable: availability.loanAvailable,
-            availabilityChecked: true,
-            checkedAt,
+            hasBook: resolvedAvailability.hasBook,
+            loanAvailable: resolvedAvailability.loanAvailable,
+            reservationAvailable: resolvedAvailability.reservationAvailable,
+            availabilityChecked: resolvedAvailability.availabilityChecked,
+            availabilityStatus: resolvedAvailability.availabilityStatus,
+            availabilitySource: resolvedAvailability.availabilitySource,
+            availabilityDetail: resolvedAvailability.availabilityDetail,
+            checkedAt: resolvedAvailability.checkedAt,
             score: computeScore({
               distanceKm,
               etaMinutes,
-              loanAvailable: availability.loanAvailable,
-              hasBook: availability.hasBook,
+              loanAvailable: resolvedAvailability.loanAvailable,
+              hasBook: resolvedAvailability.hasBook,
             }),
           } satisfies SearchResult;
         } catch {
           partialAvailability = true;
+          const fallbackAvailability = buildUnknownAvailabilitySnapshot(checkedAt);
 
           return {
             library,
             distanceKm,
             etaMinutes,
             travelTimes: buildTravelTimes(distanceKm, etaMinutes),
-            hasBook: true,
-            loanAvailable: false,
-            availabilityChecked: false,
-            checkedAt,
+            ...fallbackAvailability,
             score: computeScore({
               distanceKm,
               etaMinutes,
-              loanAvailable: false,
-              hasBook: true,
+              loanAvailable: fallbackAvailability.loanAvailable,
+              hasBook: fallbackAvailability.hasBook,
             }),
           } satisfies SearchResult;
         }
@@ -637,7 +707,7 @@ async function buildLiveResults(resolvedBook: BookCandidate, userLocation: UserL
   if (results.length === 0) {
     warnings.unshift("이 도서를 보유한 도서관을 찾지 못했습니다.");
   } else if (!results.some((result) => result.loanAvailable)) {
-    warnings.unshift("정보나루 전일 기준으로는 대출 가능 도서관이 없어 예상 소요 시간 순으로 보여줍니다.");
+    warnings.unshift("현재 확인된 결과 중 즉시 대출 가능한 도서관이 없어 예상 소요 시간 순으로 보여줍니다.");
   }
 
   return {

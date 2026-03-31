@@ -454,6 +454,11 @@ input {
   color: var(--mint);
 }
 
+.library-availability-pill.is-reservation {
+  background: rgba(217, 119, 6, 0.14);
+  color: #b45309;
+}
+
 .library-availability-pill.is-unavailable {
   background: rgba(107, 114, 128, 0.16);
   color: #4b5563;

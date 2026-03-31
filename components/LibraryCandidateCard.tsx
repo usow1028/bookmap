@@ -22,17 +22,27 @@ export function LibraryCandidateCard({
 }: LibraryCandidateCardProps) {
   const availabilityLabel = !result.availabilityChecked
     ? "확인 필요"
-    : result.loanAvailable
-      ? "정보나루 기준 가능"
-      : "정보나루 기준 불가";
+    : result.availabilitySource === "homepage"
+      ? result.availabilityStatus === "available"
+        ? "홈페이지 기준 대출 가능"
+        : result.availabilityStatus === "reservation-only"
+          ? "홈페이지 기준 예약 가능"
+          : "홈페이지 기준 대출 불가"
+      : result.loanAvailable
+        ? "정보나루 기준 가능"
+        : "정보나루 기준 불가";
   const availabilityClassName = !result.availabilityChecked
     ? "is-unknown"
-    : result.loanAvailable
+    : result.availabilityStatus === "available"
       ? "is-available"
-      : "is-unavailable";
+      : result.availabilityStatus === "reservation-only"
+        ? "is-reservation"
+        : "is-unavailable";
   const availabilityNote = !result.availabilityChecked
     ? "대출 상태를 확인하지 못했습니다. 예약하기에서 다시 확인해 주세요."
-    : `정보나루 전일 기준 ${result.checkedAt} · 예약하기에서 실제 상태를 다시 확인해 주세요.`;
+    : result.availabilitySource === "homepage"
+      ? `${result.checkedAt} 홈페이지 상세 상태${result.availabilityDetail ? ` · ${result.availabilityDetail}` : ""}`
+      : `정보나루 전일 기준 ${result.checkedAt} · 예약하기에서 실제 상태를 다시 확인해 주세요.`;
   const handleActivate = () => onSelect(result.library.id);
   const openRoute = () =>
     openNaverMapRoute({
