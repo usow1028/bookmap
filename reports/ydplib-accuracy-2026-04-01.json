@@ -1,0 +1,5254 @@
+{
+  "location": {
+    "label": "대림동1차한신아파트",
+    "lat": 37.494477752015676,
+    "lng": 126.90350095871807
+  },
+  "targetAreaCode": "11190",
+  "targetAreaName": "영등포구",
+  "targetLibraryDomain": "ydplib.or.kr",
+  "sampleCount": 50,
+  "totalDisplayedBranches": 175,
+  "totalHomepageBranches": 255,
+  "matchedBranches": 47,
+  "branchPrecision": 0.26857142857142857,
+  "branchRecall": 0.1843137254901961,
+  "exactBookMatches": 3,
+  "exactBookMatchRate": 0.06,
+  "evaluations": [
+    {
+      "book": {
+        "seq": "1902173",
+        "isbn13": "9788972756194",
+        "title": "나미야 잡화점의 기적 :히가시노 게이고 장편소설",
+        "author": "지은이: 히가시노 게이고 ;옮긴이: 양윤옥",
+        "publisher": "현대문학",
+        "sourceQuery": "소설"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나미야 잡화점의 기적"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나미야 잡화점의 기적"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나미야 잡화점의 기적"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나미야 잡화점의 기적"
+        },
+        {
+          "libraryName": "양평1동 작은도서관",
+          "normalizedLibraryName": "양평1동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[양평1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "나미야 잡화점의 기적"
+        },
+        {
+          "libraryName": "영등포동 작은도서관",
+          "normalizedLibraryName": "영등포동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나미야 잡화점의 기적"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나미야 잡화점의 기적"
+        },
+        {
+          "libraryName": "양평2동 작은도서관",
+          "normalizedLibraryName": "양평2동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[양평2동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "나미야 잡화점의 기적"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "드나드리 작은도서관",
+        "꿈터 작은도서관",
+        "영등포본동 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "양평1동 작은도서관",
+        "영등포동 작은도서관",
+        "신길1동 작은도서관",
+        "양평2동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인",
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2155671",
+        "isbn13": "9788936433598",
+        "title": "채식주의자:한강 연작소설",
+        "author": "한강",
+        "publisher": "창비",
+        "sourceQuery": "소설"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "채식주의자"
+        },
+        {
+          "libraryName": "마음서랍 작은도서관",
+          "normalizedLibraryName": "마음서랍작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[신길7동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "채식주의자"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "채식주의자"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "채식주의자"
+        },
+        {
+          "libraryName": "목화마을 작은도서관",
+          "normalizedLibraryName": "목화마을작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[목화]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "채식주의자"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "채식주의자"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "신길1동 작은도서관",
+        "마음서랍 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "영등포본동 작은도서관",
+        "목화마을 작은도서관",
+        "당산1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2037399",
+        "isbn13": "9788936434120",
+        "title": "소년이 온다 :한강 장편소설",
+        "author": "지은이: 한강",
+        "publisher": "창비",
+        "sourceQuery": "소설"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "원지공원도서관",
+          "addr": "서울특별시 영등포구 도림로47길 23",
+          "tel": "02-849-7990",
+          "homepage": "https://www.ydplib.or.kr/wjlib",
+          "lat": 37.4973418,
+          "lng": 126.8994287,
+          "distanceKm": 0.4800942609322384
+        },
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "영등포생각공장도서관",
+          "addr": "서울특별시 영등포구 문래북로 105, 1-3층",
+          "tel": "02-2069-1893",
+          "homepage": "https://www.ydplib.or.kr/sglib",
+          "lat": 37.5201166,
+          "lng": 126.8972093,
+          "distanceKm": 2.9044251312657043
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "당산2동 작은도서관",
+          "normalizedLibraryName": "당산2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소년이 온다"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "소년이 온다"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소년이 온다"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소년이 온다"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소년이 온다"
+        },
+        {
+          "libraryName": "목화마을 작은도서관",
+          "normalizedLibraryName": "목화마을작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[목화]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "소년이 온다"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "소년이 온다"
+        },
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소년이 온다"
+        },
+        {
+          "libraryName": "대림2동 작은도서관",
+          "normalizedLibraryName": "대림2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소년이 온다"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "원지공원도서관",
+        "신길도서관",
+        "대림도서관",
+        "문래도서관",
+        "영등포생각공장도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "당산2동 작은도서관",
+        "여의동 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "영등포본동 작은도서관",
+        "신길1동 작은도서관",
+        "목화마을 작은도서관",
+        "꿈터 작은도서관",
+        "여의도브라이튼도서관",
+        "대림2동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "원지공원도서관 0.48km: 홈페이지 미확인",
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3423096",
+        "isbn13": "9788936434267",
+        "title": "아몬드 :손원평 장편소설",
+        "author": "지은이: 손원평",
+        "publisher": "창비",
+        "sourceQuery": "소설"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "아몬드"
+        },
+        {
+          "libraryName": "양평1동 작은도서관",
+          "normalizedLibraryName": "양평1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[양평1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "아몬드"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "아몬드"
+        },
+        {
+          "libraryName": "대림2동 작은도서관",
+          "normalizedLibraryName": "대림2동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[대림2동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "아몬드"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "청소년 문화의집 작은도서관",
+        "양평1동 작은도서관",
+        "영등포본동 작은도서관",
+        "대림2동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인",
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5962217",
+        "isbn13": "9791161571188",
+        "title": "불편한 편의점 :김호연 장편소설",
+        "author": "지은이: 김호연",
+        "publisher": "나무옆의자",
+        "sourceQuery": "소설"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "원지공원도서관",
+          "addr": "서울특별시 영등포구 도림로47길 23",
+          "tel": "02-849-7990",
+          "homepage": "https://www.ydplib.or.kr/wjlib",
+          "lat": 37.4973418,
+          "lng": 126.8994287,
+          "distanceKm": 0.4800942609322384
+        },
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "영등포생각공장도서관",
+          "addr": "서울특별시 영등포구 문래북로 105, 1-3층",
+          "tel": "02-2069-1893",
+          "homepage": "https://www.ydplib.or.kr/sglib",
+          "lat": 37.5201166,
+          "lng": 126.8972093,
+          "distanceKm": 2.9044251312657043
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "불편한 편의점"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "불편한 편의점"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "원지공원도서관",
+        "신길도서관",
+        "대림도서관",
+        "문래도서관",
+        "영등포생각공장도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "여의도브라이튼도서관",
+        "대림1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "원지공원도서관 0.48km: 홈페이지 미확인",
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3768386",
+        "isbn13": "9791196394509",
+        "title": "죽고 싶지만 떡볶이는 먹고 싶어 :백세희 에세이",
+        "author": "지은이: 백세희",
+        "publisher": "흔",
+        "sourceQuery": "에세이"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "당산2동 작은도서관",
+          "normalizedLibraryName": "당산2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽고 싶지만 떡볶이는 먹고 싶어"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽고 싶지만 떡볶이는 먹고 싶어"
+        },
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽고 싶지만 떡볶이는 먹고 싶어"
+        },
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽고 싶지만 떡볶이는 먹고 싶어"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽고 싶지만 떡볶이는 먹고 싶어"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽고 싶지만 떡볶이는 먹고 싶어"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "당산2동 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "여의도브라이튼도서관",
+        "신길6동 작은도서관",
+        "여의동 작은도서관",
+        "드나드리 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2645770",
+        "isbn13": "9791130604626",
+        "title": "이토록 공부가 재미있어지는 순간 :공부에 지친 청소년들을 위한 힐링 에세이",
+        "author": "박성혁 지음",
+        "publisher": "다산북스",
+        "sourceQuery": "에세이"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "마음서랍 작은도서관",
+          "normalizedLibraryName": "마음서랍작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길7동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "이토록 공부가 재미있어지는 순간"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "이토록 공부가 재미있어지는 순간"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "이토록 공부가 재미있어지는 순간"
+        },
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "이토록 공부가 재미있어지는 순간"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "이토록 공부가 재미있어지는 순간"
+        },
+        {
+          "libraryName": "늘샘드리 작은도서관",
+          "normalizedLibraryName": "늘샘드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[늘샘드리]일반",
+          "reservationText": "도서예약불가",
+          "queryVariant": "이토록 공부가 재미있어지는 순간"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "이토록 공부가 재미있어지는 순간"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "이토록 공부가 재미있어지는 순간"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "이토록 공부가 재미있어지는 순간"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "신길도서관",
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "마음서랍 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "당산1동 작은도서관",
+        "여의도브라이튼도서관",
+        "대림1동 작은도서관",
+        "늘샘드리 작은도서관",
+        "드나드리 작은도서관",
+        "영등포본동 작은도서관",
+        "여의동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3201429",
+        "isbn13": "9788950965693",
+        "title": "빨강머리 앤이 하는 말 :백영옥 에세이",
+        "author": "지은이: 백영옥",
+        "publisher": "arte(아르테)",
+        "sourceQuery": "에세이"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        },
+        {
+          "libraryName": "당산2동 작은도서관",
+          "normalizedLibraryName": "당산2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        },
+        {
+          "libraryName": "대림2동 작은도서관",
+          "normalizedLibraryName": "대림2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "빨강머리 앤이 하는 말"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관"
+      ],
+      "extraOnHomepage": [
+        "대림1동 작은도서관",
+        "당산2동 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "여의동 작은도서관",
+        "당산1동 작은도서관",
+        "신길1동 작은도서관",
+        "영등포본동 작은도서관",
+        "대림2동 작은도서관",
+        "드나드리 작은도서관",
+        "꿈터 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3743307",
+        "isbn13": "9788901223032",
+        "title": "하마터면 열심히 살 뻔했다 :야매 득도 에세이",
+        "author": "하완 지음",
+        "publisher": "웅진씽크빅",
+        "sourceQuery": "에세이"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "하마터면 열심히 살 뻔했다"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "하마터면 열심히 살 뻔했다"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "하마터면 열심히 살 뻔했다"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "하마터면 열심히 살 뻔했다"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "하마터면 열심히 살 뻔했다"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "하마터면 열심히 살 뻔했다"
+        },
+        {
+          "libraryName": "대림2동 작은도서관",
+          "normalizedLibraryName": "대림2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "하마터면 열심히 살 뻔했다"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "하마터면 열심히 살 뻔했다"
+        },
+        {
+          "libraryName": "문래도서관",
+          "normalizedLibraryName": "문래도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(문래)종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "하마터면 열심히 살 뻔했다"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "문래도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [
+        "대림도서관",
+        "여의샛강도서관"
+      ],
+      "extraOnHomepage": [
+        "대림1동 작은도서관",
+        "영등포본동 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "여의동 작은도서관",
+        "꿈터 작은도서관",
+        "대림2동 작은도서관",
+        "당산1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 대출가능[비치중] / 도서예약불가",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2396953",
+        "isbn13": "9788984319097",
+        "title": "딸에게 주는 레시피 :공지영 에세이",
+        "author": "지은이: 공지영 ;그린이: 이장미",
+        "publisher": "한겨레출판",
+        "sourceQuery": "에세이"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "딸에게 주는 레시피"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "딸에게 주는 레시피"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "딸에게 주는 레시피"
+        },
+        {
+          "libraryName": "양평1동 작은도서관",
+          "normalizedLibraryName": "양평1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[양평1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "딸에게 주는 레시피"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "딸에게 주는 레시피"
+        },
+        {
+          "libraryName": "목화마을 작은도서관",
+          "normalizedLibraryName": "목화마을작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[목화]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "딸에게 주는 레시피"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "딸에게 주는 레시피"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "딸에게 주는 레시피"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "대림1동 작은도서관",
+        "여의동 작은도서관",
+        "꿈터 작은도서관",
+        "양평1동 작은도서관",
+        "드나드리 작은도서관",
+        "목화마을 작은도서관",
+        "영등포본동 작은도서관",
+        "당산1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3265201",
+        "isbn13": "9788993178692",
+        "title": "지리의 힘 :지리는 어떻게 개인의 운명을, 세계사를, 세계 경제를 좌우하는가",
+        "author": "지은이: 팀 마샬 ;옮긴이: 김미선",
+        "publisher": "사이",
+        "sourceQuery": "경제"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "지리의 힘"
+        },
+        {
+          "libraryName": "영등포동 작은도서관",
+          "normalizedLibraryName": "영등포동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[영등포동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "지리의 힘"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "지리의 힘"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "지리의 힘"
+        },
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "지리의 힘"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "지리의 힘"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "신길도서관",
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "대림1동 작은도서관",
+        "영등포동 작은도서관",
+        "드나드리 작은도서관",
+        "신길1동 작은도서관",
+        "여의도브라이튼도서관",
+        "영등포본동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5577217",
+        "isbn13": "9791187481720",
+        "title": "존리의 부자되기 습관 :대한민국 경제독립 액션 플랜",
+        "author": "존리 지음",
+        "publisher": "지식노마드",
+        "sourceQuery": "경제"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "당산2동 작은도서관",
+          "normalizedLibraryName": "당산2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "존리의 부자되기 습관"
+        },
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "존리의 부자되기 습관"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "존리의 부자되기 습관"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "존리의 부자되기 습관"
+        },
+        {
+          "libraryName": "늘샘드리 작은도서관",
+          "normalizedLibraryName": "늘샘드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[늘샘드리]일반",
+          "reservationText": "도서예약불가",
+          "queryVariant": "존리의 부자되기 습관"
+        },
+        {
+          "libraryName": "여의샛강도서관",
+          "normalizedLibraryName": "여의샛강도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "(여의)자료열람실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "존리의 부자되기 습관"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "존리의 부자되기 습관"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(대림)1층 컬렉션-경제/경영",
+          "reservationText": "도서예약신청",
+          "queryVariant": "존리의 부자되기 습관"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "존리의 부자되기 습관"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [
+        "문래도서관"
+      ],
+      "extraOnHomepage": [
+        "당산2동 작은도서관",
+        "신길6동 작은도서관",
+        "대림1동 작은도서관",
+        "꿈터 작은도서관",
+        "늘샘드리 작은도서관",
+        "드나드리 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출불가[대출중] / 도서예약신청",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 대출불가[상호대차중] / 도서예약신청"
+      ]
+    },
+    {
+      "book": {
+        "seq": "1100736",
+        "isbn13": "9788930231374",
+        "title": "Why? 화폐와 경제",
+        "author": "글: 윤상석 ;그림: 김강호",
+        "publisher": "예림당",
+        "sourceQuery": "경제"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "당산2동 작은도서관",
+          "normalizedLibraryName": "당산2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Why? 화폐와 경제"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Why? 화폐와 경제"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)2층 어린이 만화책서가",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Why? 화폐와 경제"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Why? 화폐와 경제"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Why? 화폐와 경제"
+        },
+        {
+          "libraryName": "여의샛강도서관",
+          "normalizedLibraryName": "여의샛강도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(여의)자료열람실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "Why? 화폐와 경제"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)어린이실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Why? 화폐와 경제"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [],
+      "extraOnHomepage": [
+        "당산2동 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "여의동 작은도서관",
+        "신길1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가",
+        "여의샛강도서관 3.40km: 대출불가[대출중] / 도서예약신청",
+        "선유도서관 4.42km: 대출가능[비치중] / 도서예약불가"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3824158",
+        "isbn13": "9788925564289",
+        "title": "나는 오늘도 경제적 자유를 꿈꾼다",
+        "author": "청울림 지음",
+        "publisher": "RHK(알에이치코리아)",
+        "sourceQuery": "경제"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나는 오늘도 경제적 자유를 꿈꾼다"
+        },
+        {
+          "libraryName": "문래도서관",
+          "normalizedLibraryName": "문래도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(문래)종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나는 오늘도 경제적 자유를 꿈꾼다"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나는 오늘도 경제적 자유를 꿈꾼다"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)3층 종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나는 오늘도 경제적 자유를 꿈꾼다"
+        },
+        {
+          "libraryName": "대림2동 작은도서관",
+          "normalizedLibraryName": "대림2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "나는 오늘도 경제적 자유를 꿈꾼다"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "문래도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [
+        "여의샛강도서관"
+      ],
+      "extraOnHomepage": [
+        "신길6동 작은도서관",
+        "대림2동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가",
+        "문래도서관 2.73km: 대출가능[비치중] / 도서예약불가",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3271612",
+        "isbn13": "9788960869646",
+        "title": "놓지 마 과학!",
+        "author": "글·그림: 신태훈,나승훈",
+        "publisher": "위즈덤하우스",
+        "sourceQuery": "과학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "문래도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2371728",
+        "isbn13": "9788937842184",
+        "title": "내일은 실험왕 :본격 대결 과학실험 만화",
+        "author": "글: 곰돌이 co. ;그림: 홍종현",
+        "publisher": "대한교과서",
+        "sourceQuery": "과학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "영등포생각공장도서관",
+          "addr": "서울특별시 영등포구 문래북로 105, 1-3층",
+          "tel": "02-2069-1893",
+          "homepage": "https://www.ydplib.or.kr/sglib",
+          "lat": 37.5201166,
+          "lng": 126.8972093,
+          "distanceKm": 2.9044251312657043
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "신길도서관",
+        "문래도서관",
+        "영등포생각공장도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "영등포생각공장도서관 2.90km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3356401",
+        "isbn13": "9788960869929",
+        "title": "놓지 마 과학!",
+        "author": "글·그림: 신태훈,나승훈",
+        "publisher": "위즈덤하우스",
+        "sourceQuery": "과학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "선유도서관"
+      ],
+      "extraOnHomepage": [],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5748423",
+        "isbn13": "9791164136032",
+        "title": "흔한남매의 흔한 호기심 :일상에서 만나는 과학 상식",
+        "author": "원작: 흔한남매 ;그림: 유난희",
+        "publisher": "미래엔",
+        "sourceQuery": "과학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "영등포생각공장도서관",
+          "addr": "서울특별시 영등포구 문래북로 105, 1-3층",
+          "tel": "02-2069-1893",
+          "homepage": "https://www.ydplib.or.kr/sglib",
+          "lat": 37.5201166,
+          "lng": 126.8972093,
+          "distanceKm": 2.9044251312657043
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)어린이자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "흔한남매의 흔한 호기심 :일상에서 만나는 과학 상식"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "신길도서관",
+        "대림도서관",
+        "문래도서관",
+        "영등포생각공장도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "여의도브라이튼도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3435330",
+        "isbn13": "9788960863545",
+        "title": "놓지 마 과학!",
+        "author": "글·그림: 신태훈,나승훈",
+        "publisher": "위즈덤하우스",
+        "sourceQuery": "과학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "놓지 마 과학!"
+        },
+        {
+          "libraryName": "영등포동 작은도서관",
+          "normalizedLibraryName": "영등포동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "놓지 마 과학!"
+        },
+        {
+          "libraryName": "여의샛강도서관",
+          "normalizedLibraryName": "여의샛강도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "(여의)자료열람실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "놓지 마 과학!"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "여의샛강도서관"
+      ],
+      "missingOnHomepage": [
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "영등포본동 작은도서관",
+        "영등포동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "여의샛강도서관 3.40km: 대출불가[상호대차중] / 도서예약신청",
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3917073",
+        "isbn13": "9788965746669",
+        "title": "당신이 옳다 :정혜신의 적정심리학",
+        "author": "지은이: 정혜신",
+        "publisher": "해냄",
+        "sourceQuery": "심리"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "당신이 옳다"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "당신이 옳다"
+        },
+        {
+          "libraryName": "영등포동 작은도서관",
+          "normalizedLibraryName": "영등포동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "당신이 옳다"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "당신이 옳다"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "당신이 옳다"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "당신이 옳다"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "당신이 옳다"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "당신이 옳다"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "여의도브라이튼도서관",
+        "꿈터 작은도서관",
+        "영등포동 작은도서관",
+        "신길1동 작은도서관",
+        "대림1동 작은도서관",
+        "영등포본동 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "여의동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5846583",
+        "isbn13": "9791191056372",
+        "title": "돈의 심리학 :당신은 왜 부자가 되지 못했는가",
+        "author": "모건 하우절 지음 ;이지연 옮김",
+        "publisher": "인플루엔셜",
+        "sourceQuery": "심리"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "돈의 심리학 :당신은 왜 부자가 되지 못했는가"
+        },
+        {
+          "libraryName": "대림2동 작은도서관",
+          "normalizedLibraryName": "대림2동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[대림2동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "돈의 심리학 :당신은 왜 부자가 되지 못했는가"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "돈의 심리학 :당신은 왜 부자가 되지 못했는가"
+        },
+        {
+          "libraryName": "양평1동 작은도서관",
+          "normalizedLibraryName": "양평1동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[양평1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "돈의 심리학 :당신은 왜 부자가 되지 못했는가"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "돈의 심리학 :당신은 왜 부자가 되지 못했는가"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "돈의 심리학 :당신은 왜 부자가 되지 못했는가"
+        },
+        {
+          "libraryName": "마음서랍 작은도서관",
+          "normalizedLibraryName": "마음서랍작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[신길7동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "돈의 심리학 :당신은 왜 부자가 되지 못했는가"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출불가[대출예약중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "돈의 심리학 :당신은 왜 부자가 되지 못했는가"
+        },
+        {
+          "libraryName": "신길도서관",
+          "normalizedLibraryName": "신길도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(신길)4층_종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "돈의 심리학 :당신은 왜 부자가 되지 못했는가"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "신길도서관"
+      ],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "여의도브라이튼도서관",
+        "대림2동 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "양평1동 작은도서관",
+        "여의동 작은도서관",
+        "꿈터 작은도서관",
+        "마음서랍 작은도서관",
+        "신길1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 대출불가[대출중] / 도서예약불가",
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5698929",
+        "isbn13": "9788901243658",
+        "title": "기분이 태도가 되지 않게 :기분 따라 행동하다 손해 보는 당신을 위한 심리 수업",
+        "author": "레몬심리 지음 ;박영란 옮김",
+        "publisher": "웅진씽크빅",
+        "sourceQuery": "심리"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "기분이 태도가 되지 않게"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "기분이 태도가 되지 않게"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "기분이 태도가 되지 않게"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "기분이 태도가 되지 않게"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "기분이 태도가 되지 않게"
+        },
+        {
+          "libraryName": "양평2동 작은도서관",
+          "normalizedLibraryName": "양평2동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[양평2동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "기분이 태도가 되지 않게"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "기분이 태도가 되지 않게"
+        },
+        {
+          "libraryName": "늘샘드리 작은도서관",
+          "normalizedLibraryName": "늘샘드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[늘샘드리]일반",
+          "reservationText": "도서예약불가",
+          "queryVariant": "기분이 태도가 되지 않게"
+        },
+        {
+          "libraryName": "마음서랍 작은도서관",
+          "normalizedLibraryName": "마음서랍작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[신길7동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "기분이 태도가 되지 않게"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "신길1동 작은도서관",
+        "대림1동 작은도서관",
+        "영등포본동 작은도서관",
+        "드나드리 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "양평2동 작은도서관",
+        "당산1동 작은도서관",
+        "늘샘드리 작은도서관",
+        "마음서랍 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2430844",
+        "isbn13": "9788952230645",
+        "title": "아들러 심리학을 읽는 밤 :『미움받을 용기』 기시미 이치로의 아들러 심리학 입문",
+        "author": "기시미 이치로 지음 ;박재현 옮김",
+        "publisher": "살림출판사",
+        "sourceQuery": "심리"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "아들러 심리학을 읽는 밤"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "아들러 심리학을 읽는 밤"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "아들러 심리학을 읽는 밤"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)3층 종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "아들러 심리학을 읽는 밤"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "아들러 심리학을 읽는 밤"
+        },
+        {
+          "libraryName": "여의샛강도서관",
+          "normalizedLibraryName": "여의샛강도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(여의)자료열람실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "아들러 심리학을 읽는 밤"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [
+        "문래도서관"
+      ],
+      "extraOnHomepage": [
+        "당산1동 작은도서관",
+        "드나드리 작은도서관",
+        "영등포본동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 대출가능[비치중] / 도서예약불가"
+      ]
+    },
+    {
+      "book": {
+        "seq": "1191735",
+        "isbn13": "9788930231428",
+        "title": "Why? 심리학",
+        "author": "글: 조영선 ;그림: 그림수레",
+        "publisher": "예림당",
+        "sourceQuery": "심리"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Why? 심리학"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)어린이실 보존서고",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Why? 심리학"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Why? 심리학"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관"
+      ],
+      "missingOnHomepage": [
+        "여의샛강도서관"
+      ],
+      "extraOnHomepage": [
+        "청소년 문화의집 작은도서관",
+        "신길1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3027835",
+        "isbn13": "9788934972464",
+        "title": "사피엔스 :유인원에서 사이보그까지, 인간 역사의 대담하고 위대한 질문",
+        "author": "지은이: 유발 하라리 ;옮긴이: 조현욱",
+        "publisher": "김영사",
+        "sourceQuery": "역사"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "영등포생각공장도서관",
+          "addr": "서울특별시 영등포구 문래북로 105, 1-3층",
+          "tel": "02-2069-1893",
+          "homepage": "https://www.ydplib.or.kr/sglib",
+          "lat": 37.5201166,
+          "lng": 126.8972093,
+          "distanceKm": 2.9044251312657043
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "사피엔스"
+        },
+        {
+          "libraryName": "마음서랍 작은도서관",
+          "normalizedLibraryName": "마음서랍작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길7동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "사피엔스"
+        },
+        {
+          "libraryName": "양평2동 작은도서관",
+          "normalizedLibraryName": "양평2동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[양평2동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "사피엔스"
+        },
+        {
+          "libraryName": "양평1동 작은도서관",
+          "normalizedLibraryName": "양평1동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[양평1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "사피엔스"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "사피엔스"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "신길도서관",
+        "대림도서관",
+        "문래도서관",
+        "영등포생각공장도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "꿈터 작은도서관",
+        "마음서랍 작은도서관",
+        "양평2동 작은도서관",
+        "양평1동 작은도서관",
+        "청소년 문화의집 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3238806",
+        "isbn13": "9788933870693",
+        "title": "설민석의 조선왕조실록 :대한민국이 선택한 역사 이야기",
+        "author": "지은이: 설민석",
+        "publisher": "세계사",
+        "sourceQuery": "역사"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "설민석의 조선왕조실록"
+        },
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "설민석의 조선왕조실록"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "설민석의 조선왕조실록"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "설민석의 조선왕조실록"
+        },
+        {
+          "libraryName": "당산2동 작은도서관",
+          "normalizedLibraryName": "당산2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "설민석의 조선왕조실록"
+        },
+        {
+          "libraryName": "양평2동 작은도서관",
+          "normalizedLibraryName": "양평2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[양평2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "설민석의 조선왕조실록"
+        },
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "설민석의 조선왕조실록"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "설민석의 조선왕조실록"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "설민석의 조선왕조실록"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "설민석의 조선왕조실록"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "영등포본동 작은도서관",
+        "신길6동 작은도서관",
+        "대림1동 작은도서관",
+        "당산1동 작은도서관",
+        "당산2동 작은도서관",
+        "양평2동 작은도서관",
+        "여의도브라이튼도서관",
+        "여의동 작은도서관",
+        "드나드리 작은도서관",
+        "꿈터 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3695133",
+        "isbn13": "9788950973353",
+        "title": "Go go 카카오 프렌즈 :세계 역사 문화 체험 학습만화",
+        "author": "글: 김미영 ;정보글: 최은하",
+        "publisher": "아울북(북이십일 아울북)",
+        "sourceQuery": "역사"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "양평1동 작은도서관",
+          "normalizedLibraryName": "양평1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[양평1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "Go go 카카오 프렌즈"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "양평1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3788041",
+        "isbn13": "9788950976118",
+        "title": "Go go 카카오 프렌즈 :세계 역사 문화 체험 학습만화",
+        "author": "글: 김미영 ;정보글: 최은하",
+        "publisher": "아울북(북이십일 아울북)",
+        "sourceQuery": "역사"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "영등포동 작은도서관",
+          "normalizedLibraryName": "영등포동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[영등포동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "Go go 카카오 프렌즈"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "신길도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "영등포동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3734987",
+        "isbn13": "9788950974329",
+        "title": "Go go 카카오 프렌즈 :세계 역사 문화 체험 학습만화",
+        "author": "글: 김미영 ;정보글: 최은하",
+        "publisher": "아울북(북이십일 아울북)",
+        "sourceQuery": "역사"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "Go go 카카오 프렌즈"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "신길도서관",
+        "문래도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "신길6동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5357487",
+        "isbn13": "9791130620459",
+        "title": "철학은 어떻게 삶의 무기가 되는가 :불확실한 삶을 돌파하는 50가지 생각 도구",
+        "author": "야마구치 슈 지음 ;김윤경 옮김",
+        "publisher": "다산북스",
+        "sourceQuery": "철학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        },
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        },
+        {
+          "libraryName": "청소년 문화의집 작은도서관",
+          "normalizedLibraryName": "청소년문화의집작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        },
+        {
+          "libraryName": "마음서랍 작은도서관",
+          "normalizedLibraryName": "마음서랍작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길7동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        },
+        {
+          "libraryName": "목화마을 작은도서관",
+          "normalizedLibraryName": "목화마을작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[목화]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "철학은 어떻게 삶의 무기가 되는가"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "여의도브라이튼도서관",
+        "신길6동 작은도서관",
+        "여의동 작은도서관",
+        "신길1동 작은도서관",
+        "청소년 문화의집 작은도서관",
+        "마음서랍 작은도서관",
+        "영등포본동 작은도서관",
+        "대림1동 작은도서관",
+        "드나드리 작은도서관",
+        "목화마을 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5967644",
+        "isbn13": "9791190030922",
+        "title": "소크라테스 익스프레스 :철학이 우리 인생에 스며드는 순간",
+        "author": "에릭 와이너 지음 ;김하현 옮김",
+        "publisher": "어크로스(어크로스출판그룹)",
+        "sourceQuery": "철학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "영등포생각공장도서관",
+          "addr": "서울특별시 영등포구 문래북로 105, 1-3층",
+          "tel": "02-2069-1893",
+          "homepage": "https://www.ydplib.or.kr/sglib",
+          "lat": 37.5201166,
+          "lng": 126.8972093,
+          "distanceKm": 2.9044251312657043
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        },
+        {
+          "libraryName": "마음서랍 작은도서관",
+          "normalizedLibraryName": "마음서랍작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길7동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        },
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        },
+        {
+          "libraryName": "조롱박작은도서관",
+          "normalizedLibraryName": "조롱박작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(조롱박)2층 일반/청소년",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        },
+        {
+          "libraryName": "양평2동 작은도서관",
+          "normalizedLibraryName": "양평2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[양평2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        },
+        {
+          "libraryName": "늘샘드리 작은도서관",
+          "normalizedLibraryName": "늘샘드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[늘샘드리]일반",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        },
+        {
+          "libraryName": "목화마을 작은도서관",
+          "normalizedLibraryName": "목화마을작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[목화]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "소크라테스 익스프레스"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "신길도서관",
+        "대림도서관",
+        "문래도서관",
+        "영등포생각공장도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "대림1동 작은도서관",
+        "마음서랍 작은도서관",
+        "영등포본동 작은도서관",
+        "신길1동 작은도서관",
+        "드나드리 작은도서관",
+        "조롱박작은도서관",
+        "당산1동 작은도서관",
+        "양평2동 작은도서관",
+        "늘샘드리 작은도서관",
+        "목화마을 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "6754766",
+        "isbn13": "9791192300818",
+        "title": "마흔에 읽는 쇼펜하우어 :마음의 위기를 다스리는 철학 수업",
+        "author": "강용수 지음",
+        "publisher": "유노콘텐츠그룹",
+        "sourceQuery": "철학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "원지공원도서관",
+          "addr": "서울특별시 영등포구 도림로47길 23",
+          "tel": "02-849-7990",
+          "homepage": "https://www.ydplib.or.kr/wjlib",
+          "lat": 37.4973418,
+          "lng": 126.8994287,
+          "distanceKm": 0.4800942609322384
+        },
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "영등포생각공장도서관",
+          "addr": "서울특별시 영등포구 문래북로 105, 1-3층",
+          "tel": "02-2069-1893",
+          "homepage": "https://www.ydplib.or.kr/sglib",
+          "lat": 37.5201166,
+          "lng": 126.8972093,
+          "distanceKm": 2.9044251312657043
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 쇼펜하우어"
+        },
+        {
+          "libraryName": "원지공원도서관",
+          "normalizedLibraryName": "원지공원도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[원지공원] 3층 일반자료Ⅰ",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 쇼펜하우어"
+        },
+        {
+          "libraryName": "대림2동 작은도서관",
+          "normalizedLibraryName": "대림2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 쇼펜하우어"
+        },
+        {
+          "libraryName": "목화마을 작은도서관",
+          "normalizedLibraryName": "목화마을작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[목화]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 쇼펜하우어"
+        },
+        {
+          "libraryName": "마음서랍 작은도서관",
+          "normalizedLibraryName": "마음서랍작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길7동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 쇼펜하우어"
+        },
+        {
+          "libraryName": "양평1동 작은도서관",
+          "normalizedLibraryName": "양평1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[양평1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 쇼펜하우어"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "마흔에 읽는 쇼펜하우어"
+        },
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 쇼펜하우어"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "원지공원도서관"
+      ],
+      "missingOnHomepage": [
+        "신길도서관",
+        "대림도서관",
+        "문래도서관",
+        "영등포생각공장도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "여의도브라이튼도서관",
+        "대림2동 작은도서관",
+        "목화마을 작은도서관",
+        "마음서랍 작은도서관",
+        "양평1동 작은도서관",
+        "당산1동 작은도서관",
+        "신길6동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "원지공원도서관 0.48km: 대출가능[비치중] / 도서예약불가",
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "6546065",
+        "isbn13": "9791192300245",
+        "title": "마흔에 읽는 니체 =지금 이순간을 살기 위한 철학 수업 /Nietzsche",
+        "author": "장재형 지음",
+        "publisher": "유노콘텐츠그룹",
+        "sourceQuery": "철학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "영등포스마트도서관",
+          "normalizedLibraryName": "영등포스마트도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "영등포 제1스포츠센터",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 니체 =지금 이순간을 살기 위한 철학 수업 /Nietzsche"
+        },
+        {
+          "libraryName": "밤동산 작은도서관",
+          "normalizedLibraryName": "밤동산작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[밤동산]일반",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 니체 =지금 이순간을 살기 위한 철학 수업 /Nietzsche"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)3층 종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 니체 =지금 이순간을 살기 위한 철학 수업 /Nietzsche"
+        },
+        {
+          "libraryName": "여의샛강도서관",
+          "normalizedLibraryName": "여의샛강도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(여의)자료열람실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 니체 =지금 이순간을 살기 위한 철학 수업 /Nietzsche"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "마흔에 읽는 니체 =지금 이순간을 살기 위한 철학 수업 /Nietzsche"
+        },
+        {
+          "libraryName": "조롱박작은도서관",
+          "normalizedLibraryName": "조롱박작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(조롱박)2층 일반/청소년",
+          "reservationText": "도서예약불가",
+          "queryVariant": "마흔에 읽는 니체 =지금 이순간을 살기 위한 철학 수업 /Nietzsche"
+        },
+        {
+          "libraryName": "문래도서관",
+          "normalizedLibraryName": "문래도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(문래)종합자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "마흔에 읽는 니체 =지금 이순간을 살기 위한 철학 수업 /Nietzsche"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "문래도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [
+        "신길도서관"
+      ],
+      "extraOnHomepage": [
+        "영등포스마트도서관",
+        "밤동산 작은도서관",
+        "조롱박작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가",
+        "문래도서관 2.73km: 대출불가[대출중] / 도서예약신청"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2235397",
+        "isbn13": "9788996029991",
+        "title": "(철학하는 어린이) 자유가 뭐예요? =What is freedom?",
+        "author": "글: 오스카 브르니피에 ;옮김: 양진희",
+        "publisher": "상수리나무",
+        "sourceQuery": "철학"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(대림)2층 어린이(유아)자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "자유가 뭐예요? =What is freedom?"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)어린이실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "자유가 뭐예요? =What is freedom?"
+        },
+        {
+          "libraryName": "문래도서관",
+          "normalizedLibraryName": "문래도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(문래)어린이유아열람실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "자유가 뭐예요? =What is freedom?"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "문래도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [],
+      "extraOnHomepage": [],
+      "exactBranchSetMatch": true,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출불가[대출중] / 도서예약신청",
+        "문래도서관 2.73km: 대출가능[비치중] / 도서예약불가",
+        "선유도서관 4.42km: 대출가능[비치중] / 도서예약불가"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5650860",
+        "isbn13": "9791188348633",
+        "title": "(프로 일잘러를 위한) 슬기로운 아이패드 생활 :자기계발부터 목표관리, 취미생활까지 아이패드 100% 활용법",
+        "author": "이지은 지음",
+        "publisher": "천그루숲",
+        "sourceQuery": "자기계발"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "슬기로운 아이패드 생활"
+        },
+        {
+          "libraryName": "신길도서관",
+          "normalizedLibraryName": "신길도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(신길)4층_종합자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "슬기로운 아이패드 생활"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(대림)3층 종합자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "슬기로운 아이패드 생활"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "신길도서관",
+        "대림도서관"
+      ],
+      "missingOnHomepage": [
+        "문래도서관"
+      ],
+      "extraOnHomepage": [
+        "여의도브라이튼도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 대출불가[대출중] / 도서예약신청",
+        "대림도서관 1.28km: 대출불가[대출중] / 도서예약신청",
+        "문래도서관 2.73km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2039875",
+        "isbn13": "9788954624978",
+        "title": "나는 자기계발서를 읽고 벤츠를 샀다 :어느 경영학 교수의 대담한 고백",
+        "author": "최성락 지음",
+        "publisher": "문학동네",
+        "sourceQuery": "자기계발"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        }
+      ],
+      "homepageBranches": [],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "여의샛강도서관"
+      ],
+      "extraOnHomepage": [],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "6757848",
+        "isbn13": "9791198148285",
+        "title": "(어린이를 위한) 원씽 :버리고, 선택하고, 집중하는 능력을 키워 주는 자기계발 동화",
+        "author": "김연희 글 ;김연제 그림",
+        "publisher": "터닝페이지",
+        "sourceQuery": "자기계발"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "원지공원도서관",
+          "addr": "서울특별시 영등포구 도림로47길 23",
+          "tel": "02-849-7990",
+          "homepage": "https://www.ydplib.or.kr/wjlib",
+          "lat": 37.4973418,
+          "lng": 126.8994287,
+          "distanceKm": 0.4800942609322384
+        },
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "원지공원도서관",
+          "normalizedLibraryName": "원지공원도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[원지공원] 2층 어린이유아자료",
+          "reservationText": "도서예약불가",
+          "queryVariant": "원씽"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "원씽"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "원지공원도서관"
+      ],
+      "missingOnHomepage": [
+        "신길도서관",
+        "대림도서관",
+        "문래도서관"
+      ],
+      "extraOnHomepage": [
+        "신길1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "원지공원도서관 0.48km: 대출가능[비치중] / 도서예약불가",
+        "신길도서관 1.21km: 홈페이지 미확인",
+        "대림도서관 1.28km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "1202379",
+        "isbn13": "9788956055466",
+        "title": "책은 도끼다 :박웅현 인문학 강독회",
+        "author": "지은이: 박웅현",
+        "publisher": "북하우스",
+        "sourceQuery": "인문"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "책은 도끼다"
+        },
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "책은 도끼다"
+        },
+        {
+          "libraryName": "당산2동 작은도서관",
+          "normalizedLibraryName": "당산2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "책은 도끼다"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "대림도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "대림1동 작은도서관",
+        "영등포본동 작은도서관",
+        "당산2동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인",
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5491289",
+        "isbn13": "9788995563502",
+        "title": "부의 인문학 :슈퍼리치의 서재에서 찾아낸 부자의 길",
+        "author": "브라운스톤 지음",
+        "publisher": "Openmind(오픈마인드)",
+        "sourceQuery": "인문"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "부의 인문학"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "부의 인문학"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "부의 인문학"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "선유도서관"
+      ],
+      "missingOnHomepage": [
+        "대림도서관",
+        "문래도서관"
+      ],
+      "extraOnHomepage": [
+        "당산1동 작은도서관",
+        "신길1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "선유도서관 4.42km: 대출불가[대출중] / 도서예약신청"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2620467",
+        "isbn13": "9788932472959",
+        "title": "도시는 무엇으로 사는가 :도시를 보는 열다섯 가지 인문적 시선",
+        "author": "유현준 지음",
+        "publisher": "을유문화사",
+        "sourceQuery": "인문"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "영등포본동 작은도서관",
+          "normalizedLibraryName": "영등포본동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[영등포본동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "도시는 무엇으로 사는가"
+        },
+        {
+          "libraryName": "신길1동 작은도서관",
+          "normalizedLibraryName": "신길1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "도시는 무엇으로 사는가"
+        },
+        {
+          "libraryName": "양평2동 작은도서관",
+          "normalizedLibraryName": "양평2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[양평2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "도시는 무엇으로 사는가"
+        },
+        {
+          "libraryName": "마음서랍 작은도서관",
+          "normalizedLibraryName": "마음서랍작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[신길7동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "도시는 무엇으로 사는가"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "도시는 무엇으로 사는가"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "선유도서관"
+      ],
+      "missingOnHomepage": [
+        "문래도서관",
+        "여의샛강도서관"
+      ],
+      "extraOnHomepage": [
+        "영등포본동 작은도서관",
+        "신길1동 작은도서관",
+        "양평2동 작은도서관",
+        "마음서랍 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "문래도서관 2.73km: 홈페이지 미확인",
+        "여의샛강도서관 3.40km: 홈페이지 미확인",
+        "선유도서관 4.42km: 대출가능[비치중] / 도서예약불가"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3202925",
+        "isbn13": "9788953331211",
+        "title": "(그림으로 보는) 그리스 로마 신화 :어린이 처음 인문학",
+        "author": "글: 스카이엠 ;오승원",
+        "publisher": "계림북스",
+        "sourceQuery": "인문"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "(그림으로 보는) 그리스 로마 신화 :어린이 처음 인문학"
+        },
+        {
+          "libraryName": "문래도서관",
+          "normalizedLibraryName": "문래도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(문래)어린이유아열람실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "(그림으로 보는) 그리스 로마 신화 :어린이 처음 인문학"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "문래도서관"
+      ],
+      "missingOnHomepage": [
+        "대림도서관"
+      ],
+      "extraOnHomepage": [
+        "드나드리 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 홈페이지 미확인",
+        "문래도서관 2.73km: 대출가능[비치중] / 도서예약불가"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3159556",
+        "isbn13": "9788956056609",
+        "title": "다시, 책은 도끼다 :박웅현 인문학 강독회",
+        "author": "지은이: 박웅현",
+        "publisher": "북하우스 퍼블리셔스",
+        "sourceQuery": "인문"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "목화마을 작은도서관",
+          "normalizedLibraryName": "목화마을작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[목화]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        },
+        {
+          "libraryName": "대림2동 작은도서관",
+          "normalizedLibraryName": "대림2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        },
+        {
+          "libraryName": "당산2동 작은도서관",
+          "normalizedLibraryName": "당산2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        },
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)3층 종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "다시, 책은 도끼다"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [
+        "여의샛강도서관"
+      ],
+      "extraOnHomepage": [
+        "목화마을 작은도서관",
+        "대림1동 작은도서관",
+        "대림2동 작은도서관",
+        "당산2동 작은도서관",
+        "당산1동 작은도서관",
+        "여의동 작은도서관",
+        "신길6동 작은도서관",
+        "꿈터 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가",
+        "여의샛강도서관 3.40km: 홈페이지 미확인",
+        "선유도서관 4.42km: 대출가능[비치중] / 도서예약불가"
+      ]
+    },
+    {
+      "book": {
+        "seq": "3114318",
+        "isbn13": "9788925558455",
+        "title": "잠수네 초등 3, 4학년 공부법 :영어/수학/국어/사회/과학",
+        "author": "이신애 지음",
+        "publisher": "RHK(알에이치코리아)",
+        "sourceQuery": "사회"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)어린이실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "잠수네 초등 3, 4학년 공부법"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)3층 종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "잠수네 초등 3, 4학년 공부법"
+        },
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "잠수네 초등 3, 4학년 공부법"
+        },
+        {
+          "libraryName": "양평2동 작은도서관",
+          "normalizedLibraryName": "양평2동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[양평2동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "잠수네 초등 3, 4학년 공부법"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [],
+      "extraOnHomepage": [
+        "신길6동 작은도서관",
+        "양평2동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가",
+        "선유도서관 4.42km: 대출가능[비치중] / 도서예약불가"
+      ]
+    },
+    {
+      "book": {
+        "seq": "363109",
+        "isbn13": "9788988027400",
+        "title": "죽은 시인의 사회",
+        "author": "지은이: N.H. 클라인바움 ;옮긴이: 한은주",
+        "publisher": "서교출판사",
+        "sourceQuery": "사회"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽은 시인의 사회"
+        },
+        {
+          "libraryName": "당산1동 작은도서관",
+          "normalizedLibraryName": "당산1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[당산1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽은 시인의 사회"
+        },
+        {
+          "libraryName": "여의동 작은도서관",
+          "normalizedLibraryName": "여의동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[여의동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽은 시인의 사회"
+        },
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽은 시인의 사회"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽은 시인의 사회"
+        },
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽은 시인의 사회"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)3층 종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽은 시인의 사회"
+        },
+        {
+          "libraryName": "문래도서관",
+          "normalizedLibraryName": "문래도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(문래)종합자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "죽은 시인의 사회"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "문래도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [
+        "여의샛강도서관"
+      ],
+      "extraOnHomepage": [
+        "드나드리 작은도서관",
+        "당산1동 작은도서관",
+        "여의동 작은도서관",
+        "신길6동 작은도서관",
+        "여의도브라이튼도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가",
+        "문래도서관 2.73km: 대출가능[비치중] / 도서예약불가",
+        "여의샛강도서관 3.40km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2615545",
+        "isbn13": "9788957366868",
+        "title": "어린이 사회 형사대 CSI",
+        "author": "글: 고희정 ;김준영",
+        "publisher": "가나문화콘텐츠",
+        "sourceQuery": "사회"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "어린이 사회 형사대 CSI"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "어린이 사회 형사대 CSI"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "꿈터 작은도서관",
+        "대림1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2620638",
+        "isbn13": "9788957367100",
+        "title": "어린이 사회 형사대 CSI",
+        "author": "글: 고희정 ;김준영",
+        "publisher": "가나문화콘텐츠",
+        "sourceQuery": "사회"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "어린이 사회 형사대 CSI"
+        },
+        {
+          "libraryName": "대림1동 작은도서관",
+          "normalizedLibraryName": "대림1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[대림1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "어린이 사회 형사대 CSI"
+        }
+      ],
+      "matchedDisplayedBranches": [],
+      "missingOnHomepage": [
+        "선유도서관"
+      ],
+      "extraOnHomepage": [
+        "꿈터 작은도서관",
+        "대림1동 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "선유도서관 4.42km: 홈페이지 미확인"
+      ]
+    },
+    {
+      "book": {
+        "seq": "1241509",
+        "isbn13": "9788932022888",
+        "title": "피로사회",
+        "author": "지은이: 한병철 ;옮긴이: 김태환",
+        "publisher": "문학과지성사",
+        "sourceQuery": "사회"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "문래도서관",
+          "addr": "서울특별시 영등포구 문래로20길 49",
+          "tel": "02-2629-8600",
+          "homepage": "https://www.ydplib.or.kr/mllib",
+          "lat": 37.5168566,
+          "lng": 126.8908946,
+          "distanceKm": 2.7255770246843314
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "드나드리 작은도서관",
+          "normalizedLibraryName": "드나드리작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길4동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "피로사회"
+        },
+        {
+          "libraryName": "꿈터 작은도서관",
+          "normalizedLibraryName": "꿈터작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길5동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "피로사회"
+        },
+        {
+          "libraryName": "늘샘드리 작은도서관",
+          "normalizedLibraryName": "늘샘드리작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[늘샘드리]일반",
+          "reservationText": "도서예약신청",
+          "queryVariant": "피로사회"
+        },
+        {
+          "libraryName": "목화마을 작은도서관",
+          "normalizedLibraryName": "목화마을작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[목화]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "피로사회"
+        },
+        {
+          "libraryName": "신길6동 작은도서관",
+          "normalizedLibraryName": "신길6동작은도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "[신길6동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "피로사회"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(대림)3층 종합자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "피로사회"
+        },
+        {
+          "libraryName": "문래도서관",
+          "normalizedLibraryName": "문래도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(문래)종합자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "피로사회"
+        },
+        {
+          "libraryName": "양평1동 작은도서관",
+          "normalizedLibraryName": "양평1동작은도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "[양평1동]일반실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "피로사회"
+        },
+        {
+          "libraryName": "여의도브라이튼도서관",
+          "normalizedLibraryName": "여의도브라이튼도서관",
+          "statusText": "대출불가[비치중]",
+          "roomText": "(브라이튼)일반자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "피로사회"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(선유)종합자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "피로사회"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관",
+        "문래도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [],
+      "extraOnHomepage": [
+        "드나드리 작은도서관",
+        "꿈터 작은도서관",
+        "늘샘드리 작은도서관",
+        "목화마을 작은도서관",
+        "신길6동 작은도서관",
+        "양평1동 작은도서관",
+        "여의도브라이튼도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출불가[대출중] / 도서예약신청",
+        "문래도서관 2.73km: 대출불가[대출중] / 도서예약신청",
+        "선유도서관 4.42km: 대출불가[대출중] / 도서예약신청"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5762140",
+        "isbn13": "9791165730802",
+        "title": "왜, 먼저 물어보지 않니? :아동 안전을 위한 경계 존중 교육 그림책",
+        "author": "이현혜 글 ;김주리 그림",
+        "publisher": "천개의바람",
+        "sourceQuery": "아동"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "신길도서관",
+          "addr": "서울특별시 영등포구 신길로 131",
+          "tel": "02-2165-7700",
+          "homepage": "https://www.ydplib.or.kr/sclib/index.do",
+          "lat": 37.5041458,
+          "lng": 126.9097741,
+          "distanceKm": 1.2091154587897293
+        },
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        },
+        {
+          "lib_name": "여의샛강도서관",
+          "addr": "서울특별시 영등포구 여의대로24",
+          "tel": "02-2629-2222",
+          "homepage": "https://www.ydplib.or.kr/yulib",
+          "lat": 37.5221784,
+          "lng": 126.919944,
+          "distanceKm": 3.404569398086072
+        },
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "양평1동 작은도서관",
+          "normalizedLibraryName": "양평1동작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[양평1동]일반실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "왜, 먼저 물어보지 않니?"
+        },
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)2층 어린이(유아)자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "왜, 먼저 물어보지 않니?"
+        },
+        {
+          "libraryName": "여의샛강도서관",
+          "normalizedLibraryName": "여의샛강도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(여의)자료열람실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "왜, 먼저 물어보지 않니?"
+        },
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출불가[대출중]",
+          "roomText": "(선유)어린이실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "왜, 먼저 물어보지 않니?"
+        },
+        {
+          "libraryName": "밤동산 작은도서관",
+          "normalizedLibraryName": "밤동산작은도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "[밤동산]아동",
+          "reservationText": "도서예약불가",
+          "queryVariant": "왜, 먼저 물어보지 않니?"
+        },
+        {
+          "libraryName": "신길도서관",
+          "normalizedLibraryName": "신길도서관",
+          "statusText": "대출불가[상호대차중]",
+          "roomText": "(신길)3층_어린이유아자료실",
+          "reservationText": "도서예약신청",
+          "queryVariant": "왜, 먼저 물어보지 않니?"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "신길도서관",
+        "대림도서관",
+        "여의샛강도서관",
+        "선유도서관"
+      ],
+      "missingOnHomepage": [],
+      "extraOnHomepage": [
+        "양평1동 작은도서관",
+        "밤동산 작은도서관"
+      ],
+      "exactBranchSetMatch": false,
+      "nearestDisplayedSummary": [
+        "신길도서관 1.21km: 대출불가[상호대차중] / 도서예약신청",
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가",
+        "여의샛강도서관 3.40km: 대출가능[비치중] / 도서예약불가"
+      ]
+    },
+    {
+      "book": {
+        "seq": "5535147",
+        "isbn13": "9791188477128",
+        "title": "(아동안전 캠페인 유괴예방) 엄마까투리:너구리 아저씨네 가는 길",
+        "author": "아동권리보장원 실종아동전문기관;(주)퍼니플럭스",
+        "publisher": "아동권리보장원 실종아동전문기관",
+        "sourceQuery": "아동"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "대림도서관",
+          "addr": "서울특별시 영등포구 도신로 27",
+          "tel": "02-828-3700",
+          "homepage": "https://www.ydplib.or.kr/drlib",
+          "lat": 37.5043353,
+          "lng": 126.8960733,
+          "distanceKm": 1.2770310068206294
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "대림도서관",
+          "normalizedLibraryName": "대림도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(대림)2층 어린이(유아)자료실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "엄마까투리"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "대림도서관"
+      ],
+      "missingOnHomepage": [],
+      "extraOnHomepage": [],
+      "exactBranchSetMatch": true,
+      "nearestDisplayedSummary": [
+        "대림도서관 1.28km: 대출가능[비치중] / 도서예약불가"
+      ]
+    },
+    {
+      "book": {
+        "seq": "2650878",
+        "isbn13": "9788939556041",
+        "title": "영웅이도 영웅이 필요해 :제22회 눈높이아동문학대전 당선작",
+        "author": "글: 윤해연 ;그림: 신민재",
+        "publisher": "대교",
+        "sourceQuery": "아동"
+      },
+      "displayedLibraries": [
+        {
+          "lib_name": "선유도서관",
+          "addr": "서울특별시 영등포구 선유로 43가길 10-8",
+          "tel": "02-2163-0800",
+          "homepage": "https://www.ydplib.or.kr/sylib",
+          "lat": 37.5333431,
+          "lng": 126.8929576,
+          "distanceKm": 4.420548508279351
+        }
+      ],
+      "homepageBranches": [
+        {
+          "libraryName": "선유도서관",
+          "normalizedLibraryName": "선유도서관",
+          "statusText": "대출가능[비치중]",
+          "roomText": "(선유)어린이실",
+          "reservationText": "도서예약불가",
+          "queryVariant": "영웅이도 영웅이 필요해"
+        }
+      ],
+      "matchedDisplayedBranches": [
+        "선유도서관"
+      ],
+      "missingOnHomepage": [],
+      "extraOnHomepage": [],
+      "exactBranchSetMatch": true,
+      "nearestDisplayedSummary": [
+        "선유도서관 4.42km: 대출가능[비치중] / 도서예약불가"
+      ]
+    }
+  ]
+}
